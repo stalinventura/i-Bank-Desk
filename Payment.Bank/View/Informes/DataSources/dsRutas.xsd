@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsRutas" targetNamespace="http://tempuri.org/dsRutas.xsd" xmlns:mstns="http://tempuri.org/dsRutas.xsd" xmlns="http://tempuri.org/dsRutas.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Payment_BankConnectionString2" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Payment_BankConnectionString2 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Payment.Bank.Properties.Settings.GlobalReference.Default.Payment_BankConnectionString2" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Payment_BankConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Payment_BankConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Payment.Bank.Properties.Settings.GlobalReference.Default.Payment_BankConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CuotasTableAdapter" GeneratorDataComponentClassName="CuotasTableAdapter" Name="Cuotas" UserDataComponentName="CuotasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Payment_BankConnectionString (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        CASE WHEN VENCE &lt; @Hasta THEN 'Si' ELSE '' END AS Vencido, Contratos.ContratoID, Solicitudes.Monto, CAST(@Hasta AS datetime) AS Hasta, CONVERT(nvarchar(10), CASE WHEN VENCE &lt; @Hasta THEN '' ELSE
+                             (SELECT        COUNT(CuotaID)
+                               FROM            Cuotas AS A
+                               WHERE        a.ContratoID = Contratos.ContratoID AND A.Vence &lt;= @Hasta) END) AS Semana, Contratos.Fecha, Contratos.Vence, CASE WHEN Contratos.Vence &lt;= @Hasta THEN 'Si' END AS Vencido, 
+                         Personas.Nombres + ' ' + Personas.Apellidos + ' [' + Personas.Documento + '] ' AS Cliente, Ciudades.Ciudad, Personas.Direccion AS DireccionCliente, Personas.Telefono, Personas.Celular, 
+                         CASE WHEN VENCE &lt; @Hasta THEN 0 ELSE Contratos.Cuota END AS Cuotas, CASE WHEN
+                             (SELECT        { fn IFNULL(SUM(Capital + Interes + Mora + Comision + Legal), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Interes + Comision + Mora + Legal) AS Pagado
+                                                                 FROM            DetalleRecibos AS DetalleRecibos_2
+                                                                 WHERE        (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos AS Recibos_2
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID) AND (EstadoID = 1)))), 0) } AS Atraso
+                               FROM            Cuotas AS Cuotas_1
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence &lt; @Hasta)) &lt; 0 THEN 0 ELSE
+                             (SELECT        { fn IFNULL(SUM(Capital + Interes + Mora + Comision + Legal), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Interes + Comision + Mora + Legal) AS Pagado
+                                                                 FROM            DetalleRecibos AS DetalleRecibos_2
+                                                                 WHERE        (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos AS Recibos_2
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID) AND (EstadoID = 1)))), 0) } AS Atraso
+                               FROM            Cuotas AS Cuotas_1
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence &lt; @Hasta)) END AS Atraso, Rutas.Ruta, Empresas.Empresa, Empresas.Direccion, Empresas.Telefonos, Empresas.Rnc, Sucursales.Sucursal,
+                             (SELECT        Nombres + ' ' + Apellidos AS Oficial
+                               FROM            Personas AS P
+                               WHERE        (Documento = Oficiales.Documento)) AS Oficial
+FROM            Solicitudes INNER JOIN
+                         Contratos ON Solicitudes.SolicitudID = Contratos.SolicitudID INNER JOIN
+                         Clientes ON Solicitudes.ClienteID = Clientes.ClienteID INNER JOIN
+                         Personas ON Clientes.Documento = Personas.Documento INNER JOIN
+                         Ciudades ON Personas.CiudadID = Ciudades.CiudadID INNER JOIN
+                         Oficiales ON Contratos.OficialID = Oficiales.OficialID INNER JOIN
+                         Condiciones ON Solicitudes.CondicionID = Condiciones.CondicionID INNER JOIN
+                         Sucursales ON Clientes.SucursalID = Sucursales.SucursalID INNER JOIN
+                         Empresas ON Sucursales.EmpresaID = Empresas.EmpresaID INNER JOIN
+                         Rutas ON Contratos.RutaID = Rutas.RutaID
+WHERE        (Contratos.EstadoID = 1) AND (Clientes.SucursalID = @SucursalID) AND (Contratos.RutaID = @RutaID)
+ORDER BY Contratos.ContratoID</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="Hasta" ColumnName="" DataSourceName="" DataTypeServer="unknown" DbType="Int32" Direction="Input" ParameterName="@Hasta" Precision="0" Scale="0" Size="0" SourceColumn="" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="SucursalID" ColumnName="SucursalID" DataSourceName="[Payment.Bank].dbo.Clientes" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@SucursalID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="SucursalID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="RutaID" ColumnName="RutaID" DataSourceName="[Payment.Bank].dbo.Contratos" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@RutaID" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="RutaID" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ContratoID" DataSetColumn="ContratoID" />
+              <Mapping SourceColumn="Vence" DataSetColumn="Vence" />
+              <Mapping SourceColumn="Vencido" DataSetColumn="Vencido" />
+              <Mapping SourceColumn="Hasta" DataSetColumn="Hasta" />
+              <Mapping SourceColumn="Semana" DataSetColumn="Semana" />
+              <Mapping SourceColumn="Fecha" DataSetColumn="Fecha" />
+              <Mapping SourceColumn="Vencido1" DataSetColumn="Vencido1" />
+              <Mapping SourceColumn="Cliente" DataSetColumn="Cliente" />
+              <Mapping SourceColumn="Ciudad" DataSetColumn="Ciudad" />
+              <Mapping SourceColumn="DireccionCliente" DataSetColumn="DireccionCliente" />
+              <Mapping SourceColumn="Telefono" DataSetColumn="Telefono" />
+              <Mapping SourceColumn="Celular" DataSetColumn="Celular" />
+              <Mapping SourceColumn="Ruta" DataSetColumn="Ruta" />
+              <Mapping SourceColumn="Empresa" DataSetColumn="Empresa" />
+              <Mapping SourceColumn="Direccion" DataSetColumn="Direccion" />
+              <Mapping SourceColumn="Telefonos" DataSetColumn="Telefonos" />
+              <Mapping SourceColumn="Rnc" DataSetColumn="Rnc" />
+              <Mapping SourceColumn="Sucursal" DataSetColumn="Sucursal" />
+              <Mapping SourceColumn="Oficial" DataSetColumn="Oficial" />
+              <Mapping SourceColumn="Monto" DataSetColumn="Monto1" />
+              <Mapping SourceColumn="Cuotas" DataSetColumn="Cuotas1" />
+              <Mapping SourceColumn="Atraso" DataSetColumn="Atraso1" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsRutas" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsRutas" msprop:Generator_UserDSName="dsRutas">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Cuotas" msprop:Generator_TableClassName="CuotasDataTable" msprop:Generator_TableVarName="tableCuotas" msprop:Generator_RowChangedName="CuotasRowChanged" msprop:Generator_TablePropName="Cuotas" msprop:Generator_RowDeletingName="CuotasRowDeleting" msprop:Generator_RowChangingName="CuotasRowChanging" msprop:Generator_RowEvHandlerName="CuotasRowChangeEventHandler" msprop:Generator_RowDeletedName="CuotasRowDeleted" msprop:Generator_RowClassName="CuotasRow" msprop:Generator_UserTableName="Cuotas" msprop:Generator_RowEvArgName="CuotasRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ContratoID" msprop:Generator_ColumnVarNameInTable="columnContratoID" msprop:Generator_ColumnPropNameInRow="ContratoID" msprop:Generator_ColumnPropNameInTable="ContratoIDColumn" msprop:Generator_UserColumnName="ContratoID" type="xs:int" />
+              <xs:element name="Vence" msprop:Generator_ColumnVarNameInTable="columnVence" msprop:Generator_ColumnPropNameInRow="Vence" msprop:Generator_ColumnPropNameInTable="VenceColumn" msprop:Generator_UserColumnName="Vence" type="xs:dateTime" />
+              <xs:element name="Vencido" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnVencido" msprop:Generator_ColumnPropNameInRow="Vencido" msprop:Generator_ColumnPropNameInTable="VencidoColumn" msprop:Generator_UserColumnName="Vencido" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Monto" msprop:Generator_ColumnVarNameInTable="columnMonto" msprop:Generator_ColumnPropNameInRow="Monto" msprop:Generator_ColumnPropNameInTable="MontoColumn" msprop:Generator_UserColumnName="Monto" type="xs:decimal" />
+              <xs:element name="Hasta" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnHasta" msprop:Generator_ColumnPropNameInRow="Hasta" msprop:Generator_ColumnPropNameInTable="HastaColumn" msprop:Generator_UserColumnName="Hasta" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Semana" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnSemana" msprop:Generator_ColumnPropNameInRow="Semana" msprop:Generator_ColumnPropNameInTable="SemanaColumn" msprop:Generator_UserColumnName="Semana" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" />
+              <xs:element name="Vencido1" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnVencido1" msprop:Generator_ColumnPropNameInRow="Vencido1" msprop:Generator_ColumnPropNameInTable="Vencido1Column" msprop:Generator_UserColumnName="Vencido1" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cliente" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCliente" msprop:Generator_ColumnPropNameInRow="Cliente" msprop:Generator_ColumnPropNameInTable="ClienteColumn" msprop:Generator_UserColumnName="Cliente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="218" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Ciudad" msprop:Generator_ColumnVarNameInTable="columnCiudad" msprop:Generator_ColumnPropNameInRow="Ciudad" msprop:Generator_ColumnPropNameInTable="CiudadColumn" msprop:Generator_UserColumnName="Ciudad" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DireccionCliente" msprop:Generator_ColumnVarNameInTable="columnDireccionCliente" msprop:Generator_ColumnPropNameInRow="DireccionCliente" msprop:Generator_ColumnPropNameInTable="DireccionClienteColumn" msprop:Generator_UserColumnName="DireccionCliente" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefono" msprop:Generator_ColumnVarNameInTable="columnTelefono" msprop:Generator_ColumnPropNameInRow="Telefono" msprop:Generator_ColumnPropNameInTable="TelefonoColumn" msprop:Generator_UserColumnName="Telefono" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="13" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Celular" msprop:Generator_ColumnVarNameInTable="columnCelular" msprop:Generator_ColumnPropNameInRow="Celular" msprop:Generator_ColumnPropNameInTable="CelularColumn" msprop:Generator_UserColumnName="Celular" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="13" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cuotas" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnCuotas" msprop:Generator_ColumnPropNameInRow="Cuotas" msprop:Generator_ColumnPropNameInTable="CuotasColumn" msprop:Generator_UserColumnName="Cuotas" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Atraso" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnAtraso" msprop:Generator_ColumnPropNameInRow="Atraso" msprop:Generator_ColumnPropNameInTable="AtrasoColumn" msprop:Generator_UserColumnName="Atraso" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Ruta" msprop:Generator_ColumnVarNameInTable="columnRuta" msprop:Generator_ColumnPropNameInRow="Ruta" msprop:Generator_ColumnPropNameInTable="RutaColumn" msprop:Generator_UserColumnName="Ruta" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Empresa" msprop:Generator_ColumnVarNameInTable="columnEmpresa" msprop:Generator_ColumnPropNameInRow="Empresa" msprop:Generator_ColumnPropNameInTable="EmpresaColumn" msprop:Generator_UserColumnName="Empresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_UserColumnName="Direccion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefonos" msprop:Generator_ColumnVarNameInTable="columnTelefonos" msprop:Generator_ColumnPropNameInRow="Telefonos" msprop:Generator_ColumnPropNameInTable="TelefonosColumn" msprop:Generator_UserColumnName="Telefonos" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rnc" msprop:Generator_ColumnVarNameInTable="columnRnc" msprop:Generator_ColumnPropNameInRow="Rnc" msprop:Generator_ColumnPropNameInTable="RncColumn" msprop:Generator_UserColumnName="Rnc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Sucursal" msprop:Generator_ColumnVarNameInTable="columnSucursal" msprop:Generator_ColumnPropNameInRow="Sucursal" msprop:Generator_ColumnPropNameInTable="SucursalColumn" msprop:Generator_UserColumnName="Sucursal" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Oficial" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnOficial" msprop:Generator_ColumnPropNameInRow="Oficial" msprop:Generator_ColumnPropNameInTable="OficialColumn" msprop:Generator_UserColumnName="Oficial" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="201" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Monto1" msdata:Caption="Monto" msprop:Generator_ColumnVarNameInTable="columnMonto1" msprop:Generator_ColumnPropNameInRow="Monto1" msprop:Generator_ColumnPropNameInTable="Monto1Column" msprop:Generator_UserColumnName="Monto1" type="xs:double" />
+              <xs:element name="Cuotas1" msdata:ReadOnly="true" msdata:Caption="Cuotas" msprop:Generator_ColumnVarNameInTable="columnCuotas1" msprop:Generator_ColumnPropNameInRow="Cuotas1" msprop:Generator_ColumnPropNameInTable="Cuotas1Column" msprop:Generator_UserColumnName="Cuotas1" type="xs:double" minOccurs="0" />
+              <xs:element name="Atraso1" msdata:ReadOnly="true" msdata:Caption="Atraso" msprop:Generator_ColumnVarNameInTable="columnAtraso1" msprop:Generator_ColumnPropNameInRow="Atraso1" msprop:Generator_ColumnPropNameInTable="Atraso1Column" msprop:Generator_UserColumnName="Atraso1" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Cuotas" />
+      <xs:field xpath="mstns:ContratoID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

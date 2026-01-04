@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsCertificados" targetNamespace="http://tempuri.org/dsCertificados.xsd" xmlns:mstns="http://tempuri.org/dsCertificados.xsd" xmlns="http://tempuri.org/dsCertificados.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsCertificados" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsCertificados" msprop:Generator_UserDSName="dsCertificados">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Certificados" msprop:Generator_TableClassName="CertificadosDataTable" msprop:Generator_TableVarName="tableCertificados" msprop:Generator_RowChangedName="CertificadosRowChanged" msprop:Generator_TablePropName="Certificados" msprop:Generator_RowDeletingName="CertificadosRowDeleting" msprop:Generator_RowChangingName="CertificadosRowChanging" msprop:Generator_RowEvHandlerName="CertificadosRowChangeEventHandler" msprop:Generator_RowDeletedName="CertificadosRowDeleted" msprop:Generator_RowClassName="CertificadosRow" msprop:Generator_UserTableName="Certificados" msprop:Generator_RowEvArgName="CertificadosRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CertificadoID" msprop:Generator_ColumnVarNameInTable="columnCertificadoID" msprop:Generator_ColumnPropNameInRow="CertificadoID" msprop:Generator_ColumnPropNameInTable="CertificadoIDColumn" msprop:Generator_UserColumnName="CertificadoID" type="xs:int" minOccurs="0" />
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Vence" msprop:Generator_ColumnVarNameInTable="columnVence" msprop:Generator_ColumnPropNameInRow="Vence" msprop:Generator_ColumnPropNameInTable="VenceColumn" msprop:Generator_UserColumnName="Vence" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Documento" msprop:Generator_ColumnVarNameInTable="columnDocumento" msprop:Generator_ColumnPropNameInRow="Documento" msprop:Generator_ColumnPropNameInTable="DocumentoColumn" msprop:Generator_UserColumnName="Documento" type="xs:string" minOccurs="0" />
+              <xs:element name="Nombres" msprop:Generator_ColumnVarNameInTable="columnNombres" msprop:Generator_ColumnPropNameInRow="Nombres" msprop:Generator_ColumnPropNameInTable="NombresColumn" msprop:Generator_UserColumnName="Nombres" type="xs:string" minOccurs="0" />
+              <xs:element name="Apellidos" msprop:Generator_ColumnVarNameInTable="columnApellidos" msprop:Generator_ColumnPropNameInRow="Apellidos" msprop:Generator_ColumnPropNameInTable="ApellidosColumn" msprop:Generator_UserColumnName="Apellidos" type="xs:string" minOccurs="0" />
+              <xs:element name="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_UserColumnName="Direccion" type="xs:string" minOccurs="0" />
+              <xs:element name="Provincia" msprop:Generator_ColumnVarNameInTable="columnProvincia" msprop:Generator_ColumnPropNameInRow="Provincia" msprop:Generator_ColumnPropNameInTable="ProvinciaColumn" msprop:Generator_UserColumnName="Provincia" type="xs:string" minOccurs="0" />
+              <xs:element name="Interes" msprop:Generator_ColumnVarNameInTable="columnInteres" msprop:Generator_ColumnPropNameInRow="Interes" msprop:Generator_ColumnPropNameInTable="InteresColumn" msprop:Generator_UserColumnName="Interes" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Tiempo" msprop:Generator_ColumnVarNameInTable="columnTiempo" msprop:Generator_ColumnPropNameInRow="Tiempo" msprop:Generator_ColumnPropNameInTable="TiempoColumn" msprop:Generator_UserColumnName="Tiempo" type="xs:short" minOccurs="0" />
+              <xs:element name="TipoCertificadoID" msprop:Generator_ColumnVarNameInTable="columnTipoCertificadoID" msprop:Generator_ColumnPropNameInRow="TipoCertificadoID" msprop:Generator_ColumnPropNameInTable="TipoCertificadoIDColumn" msprop:Generator_UserColumnName="TipoCertificadoID" type="xs:short" minOccurs="0" />
+              <xs:element name="Monto" msprop:Generator_ColumnVarNameInTable="columnMonto" msprop:Generator_ColumnPropNameInRow="Monto" msprop:Generator_ColumnPropNameInTable="MontoColumn" msprop:Generator_UserColumnName="Monto" type="xs:decimal" minOccurs="0" />
+              <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:string" minOccurs="0" />
+              <xs:element name="Moneda" msprop:Generator_ColumnVarNameInTable="columnMoneda" msprop:Generator_ColumnPropNameInRow="Moneda" msprop:Generator_ColumnPropNameInTable="MonedaColumn" msprop:Generator_UserColumnName="Moneda" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Security" msprop:Generator_TableClassName="SecurityDataTable" msprop:Generator_TableVarName="tableSecurity" msprop:Generator_TablePropName="Security" msprop:Generator_RowDeletingName="SecurityRowDeleting" msprop:Generator_RowChangingName="SecurityRowChanging" msprop:Generator_RowEvHandlerName="SecurityRowChangeEventHandler" msprop:Generator_RowDeletedName="SecurityRowDeleted" msprop:Generator_UserTableName="Security" msprop:Generator_RowChangedName="SecurityRowChanged" msprop:Generator_RowEvArgName="SecurityRowChangeEvent" msprop:Generator_RowClassName="SecurityRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BarCode" msprop:Generator_ColumnVarNameInTable="columnBarCode" msprop:Generator_ColumnPropNameInRow="BarCode" msprop:Generator_ColumnPropNameInTable="BarCodeColumn" msprop:Generator_UserColumnName="BarCode" type="xs:base64Binary" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="CertificadosKey1">
+      <xs:selector xpath=".//mstns:Certificados" />
+      <xs:field xpath="mstns:CertificadoID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

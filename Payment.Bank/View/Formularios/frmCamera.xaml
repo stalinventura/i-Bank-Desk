@@ -1,0 +1,51 @@
+﻿<Window x:Class="Payment.Bank.View.Formularios.frmCamera" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="titleWebCamera" 
+    Height="350" Width="350" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" BorderBrush="{StaticResource BackgroundHeader}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  ShowInTaskbar="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="{StaticResource BackgroundHeader}" Grid.Row="0" Grid.ColumnSpan="3" Stroke="Black" Margin="-2,-2,-2, -2"/>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="White" BorderBrush="black"  CornerRadius="5,5,5,5" Margin="5,40" BorderThickness="1" Grid.Column="1">
+                <Grid>
+                    <Image Margin="2,0" Name="photoSrc" Stretch="Uniform">
+                        <!-- <Imag4e.BitmapEffect>
+                                        <OuterGlowBitmapEffect GlowColor="#FF000000" GlowSize="5"/>
+                                   </Image.BitmapEffect>-->
+                    </Image>
+                </Grid>
+            </Border>
+            <Border Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="5,5,5,5" Margin="5,40" Grid.Column="0">
+                <Grid>
+                    <Image Margin="2,0" Name="WebCamSrc" Stretch="Uniform" />
+                </Grid>
+            </Border>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Name="spButton" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="2">
+            <Button Height="55" Width="55" Margin="0" Name="btnAceptar"  IsDefault="True" TabIndex="36">
+                <Image Width="40" Height="40" Source="/Images/camera.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False" TabIndex="37">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Column="1" TextWrapping="Wrap" Text="titleWebCamera" Foreground="White" FontSize="18" VerticalAlignment="Top" Width="297" Height="24"/>
+    </Grid>
+</Window>

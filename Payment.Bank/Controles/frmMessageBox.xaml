@@ -1,0 +1,27 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.Controles.frmMessageBox" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="Acceso al Sistema" ShowTitleBar="True" TitleAlignment="Left"  Width="550" Height="250" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+
+    <Grid x:Name="gridLogin" Height="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140" />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70*" />
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <Image Height="100" Margin="10,10,0,47" Name="MessageIcon" Stretch="Uniform" VerticalAlignment="Center" Grid.RowSpan="2" />
+        <Border BorderBrush="{x:Null}" BorderThickness="1" Grid.Column="1" Margin="0" Name="TextBlockBorder" Grid.Row="0">
+            <!--<ScrollViewer>-->
+            <TextBlock FontSize="16" FontWeight="Normal" Name="TextBlock" Text="Message" VerticalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="0,35,20,0"  />
+            <!-- </ScrollViewer> -->
+        </Border>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,0" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Height="55">
+            <Button Height="55" Margin="0" Name="btnAceptar" Width="55" Grid.Column="2" IsDefault="True">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Height="55" Margin="0" Name="btnSalir" Width="55" Grid.Column="2" IsCancel="True">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

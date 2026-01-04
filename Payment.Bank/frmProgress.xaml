@@ -1,0 +1,26 @@
+﻿<Window x:Class="Payment.Bank.frmProgress"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Payment.Bank"
+        mc:Ignorable="d"
+        Height="150" Width="450" WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" BorderBrush="{StaticResource BackgroundHeader}">
+    <Grid Name="gridLogin">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle Fill="{StaticResource BackgroundHeader}" Grid.ColumnSpan="3" Stroke="Black" Margin="-2,-2,-2, -2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Column="1" TextWrapping="Wrap" Text="lblLoading" Foreground="White" FontSize="18" VerticalAlignment="Top" Width="122" Height="24"/>
+        <ProgressBar Name="ProgressBar" Maximum="100" Grid.Column="1" Margin="10,35,10,48" Height="20" Grid.Row="1"/>
+        <TextBlock x:Name="lblProgress" Grid.Column="1" Margin="10,60,10,10" FontWeight="Bold" TextAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text=""/>
+
+    </Grid>
+</Window>

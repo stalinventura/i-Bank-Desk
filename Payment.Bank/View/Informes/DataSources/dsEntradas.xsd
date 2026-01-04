@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsEntradas" targetNamespace="http://tempuri.org/dsEntradas.xsd" xmlns:mstns="http://tempuri.org/dsEntradas.xsd" xmlns="http://tempuri.org/dsEntradas.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="Payment_BankConnectionString5" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="Payment_BankConnectionString5 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Payment.Bank.Properties.Settings.GlobalReference.Default.Payment_BankConnectionString5" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="EntradasTableAdapter" GeneratorDataComponentClassName="EntradasTableAdapter" Name="Entradas" UserDataComponentName="EntradasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Payment_BankConnectionString5 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        Entradas.EntradaID, Entradas.Fecha, Entradas.Referencia, Entradas.Concepto, Sucursales.Sucursal, TipoMovimientos.Movimiento, Empresas.Empresa, Sucursales.Direccion, Sucursales.Telefonos, Empresas.Rnc, 
+                         Empresas.Siglas
+FROM            Entradas INNER JOIN
+                         Sucursales ON Entradas.SucursalID = Sucursales.SucursalID INNER JOIN
+                         TipoMovimientos ON Entradas.TipoMovimientoID = TipoMovimientos.TipoMovimientoID INNER JOIN
+                         Empresas ON Sucursales.EmpresaID = Empresas.EmpresaID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Fecha" DataSetColumn="Fecha" />
+              <Mapping SourceColumn="Referencia" DataSetColumn="Referencia" />
+              <Mapping SourceColumn="Concepto" DataSetColumn="Concepto" />
+              <Mapping SourceColumn="EntradaID" DataSetColumn="EntradaID" />
+              <Mapping SourceColumn="Sucursal" DataSetColumn="Sucursal" />
+              <Mapping SourceColumn="Movimiento" DataSetColumn="Movimiento" />
+              <Mapping SourceColumn="Empresa" DataSetColumn="Empresa" />
+              <Mapping SourceColumn="Direccion" DataSetColumn="Direccion" />
+              <Mapping SourceColumn="Telefonos" DataSetColumn="Telefonos" />
+              <Mapping SourceColumn="Rnc" DataSetColumn="Rnc" />
+              <Mapping SourceColumn="Siglas" DataSetColumn="Siglas" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="DetalleEntradasTableAdapter" GeneratorDataComponentClassName="DetalleEntradasTableAdapter" Name="DetalleEntradas" UserDataComponentName="DetalleEntradasTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="Payment_BankConnectionString5 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        DetalleEntradas.EntradaID, Auxiliares.Codigo, Auxiliares.Auxiliar, TipoDocumentos.TipoDocumento, DetalleEntradas.Numero, DetalleEntradas.Debito, DetalleEntradas.Credito
+FROM            DetalleEntradas INNER JOIN
+                         Auxiliares ON DetalleEntradas.AuxiliarID = Auxiliares.AuxiliarID INNER JOIN
+                         TipoDocumentos ON DetalleEntradas.TipoDocumentoID = TipoDocumentos.TipoDocumentoID</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="EntradaID" DataSetColumn="EntradaID" />
+              <Mapping SourceColumn="Debito" DataSetColumn="Debito" />
+              <Mapping SourceColumn="Credito" DataSetColumn="Credito" />
+              <Mapping SourceColumn="Numero" DataSetColumn="Numero" />
+              <Mapping SourceColumn="Codigo" DataSetColumn="Codigo" />
+              <Mapping SourceColumn="Auxiliar" DataSetColumn="Auxiliar" />
+              <Mapping SourceColumn="TipoDocumento" DataSetColumn="TipoDocumento" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsEntradas" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsEntradas" msprop:Generator_UserDSName="dsEntradas">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Entradas" msprop:Generator_TableClassName="EntradasDataTable" msprop:Generator_TableVarName="tableEntradas" msprop:Generator_TablePropName="Entradas" msprop:Generator_RowDeletingName="EntradasRowDeleting" msprop:Generator_RowChangingName="EntradasRowChanging" msprop:Generator_RowEvHandlerName="EntradasRowChangeEventHandler" msprop:Generator_RowDeletedName="EntradasRowDeleted" msprop:Generator_UserTableName="Entradas" msprop:Generator_RowChangedName="EntradasRowChanged" msprop:Generator_RowEvArgName="EntradasRowChangeEvent" msprop:Generator_RowClassName="EntradasRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Fecha" msprop:Generator_ColumnVarNameInTable="columnFecha" msprop:Generator_ColumnPropNameInRow="Fecha" msprop:Generator_ColumnPropNameInTable="FechaColumn" msprop:Generator_UserColumnName="Fecha" type="xs:dateTime" />
+              <xs:element name="Referencia" msprop:Generator_ColumnVarNameInTable="columnReferencia" msprop:Generator_ColumnPropNameInRow="Referencia" msprop:Generator_ColumnPropNameInTable="ReferenciaColumn" msprop:Generator_UserColumnName="Referencia" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Concepto" msprop:Generator_ColumnVarNameInTable="columnConcepto" msprop:Generator_ColumnPropNameInRow="Concepto" msprop:Generator_ColumnPropNameInTable="ConceptoColumn" msprop:Generator_UserColumnName="Concepto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="EntradaID" msprop:Generator_ColumnVarNameInTable="columnEntradaID" msprop:Generator_ColumnPropNameInRow="EntradaID" msprop:Generator_ColumnPropNameInTable="EntradaIDColumn" msprop:Generator_UserColumnName="EntradaID" type="xs:int" />
+              <xs:element name="Sucursal" msprop:Generator_ColumnVarNameInTable="columnSucursal" msprop:Generator_ColumnPropNameInRow="Sucursal" msprop:Generator_ColumnPropNameInTable="SucursalColumn" msprop:Generator_UserColumnName="Sucursal" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Movimiento" msprop:Generator_ColumnVarNameInTable="columnMovimiento" msprop:Generator_ColumnPropNameInRow="Movimiento" msprop:Generator_ColumnPropNameInTable="MovimientoColumn" msprop:Generator_UserColumnName="Movimiento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Empresa" msprop:Generator_ColumnVarNameInTable="columnEmpresa" msprop:Generator_ColumnPropNameInRow="Empresa" msprop:Generator_ColumnPropNameInTable="EmpresaColumn" msprop:Generator_UserColumnName="Empresa" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Direccion" msprop:Generator_ColumnVarNameInTable="columnDireccion" msprop:Generator_ColumnPropNameInRow="Direccion" msprop:Generator_ColumnPropNameInTable="DireccionColumn" msprop:Generator_UserColumnName="Direccion" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Telefonos" msprop:Generator_ColumnVarNameInTable="columnTelefonos" msprop:Generator_ColumnPropNameInRow="Telefonos" msprop:Generator_ColumnPropNameInTable="TelefonosColumn" msprop:Generator_UserColumnName="Telefonos" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Rnc" msprop:Generator_ColumnVarNameInTable="columnRnc" msprop:Generator_ColumnPropNameInRow="Rnc" msprop:Generator_ColumnPropNameInTable="RncColumn" msprop:Generator_UserColumnName="Rnc" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Siglas" msprop:Generator_ColumnVarNameInTable="columnSiglas" msprop:Generator_ColumnPropNameInRow="Siglas" msprop:Generator_ColumnPropNameInTable="SiglasColumn" msprop:Generator_UserColumnName="Siglas" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DetalleEntradas" msprop:Generator_TableClassName="DetalleEntradasDataTable" msprop:Generator_TableVarName="tableDetalleEntradas" msprop:Generator_TablePropName="DetalleEntradas" msprop:Generator_RowDeletingName="DetalleEntradasRowDeleting" msprop:Generator_RowChangingName="DetalleEntradasRowChanging" msprop:Generator_RowEvHandlerName="DetalleEntradasRowChangeEventHandler" msprop:Generator_RowDeletedName="DetalleEntradasRowDeleted" msprop:Generator_UserTableName="DetalleEntradas" msprop:Generator_RowChangedName="DetalleEntradasRowChanged" msprop:Generator_RowEvArgName="DetalleEntradasRowChangeEvent" msprop:Generator_RowClassName="DetalleEntradasRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EntradaID" msprop:Generator_ColumnVarNameInTable="columnEntradaID" msprop:Generator_ColumnPropNameInRow="EntradaID" msprop:Generator_ColumnPropNameInTable="EntradaIDColumn" msprop:Generator_UserColumnName="EntradaID" type="xs:int" />
+              <xs:element name="Debito" msprop:Generator_ColumnVarNameInTable="columnDebito" msprop:Generator_ColumnPropNameInRow="Debito" msprop:Generator_ColumnPropNameInTable="DebitoColumn" msprop:Generator_UserColumnName="Debito" type="xs:double" />
+              <xs:element name="Credito" msprop:Generator_ColumnVarNameInTable="columnCredito" msprop:Generator_ColumnPropNameInRow="Credito" msprop:Generator_ColumnPropNameInTable="CreditoColumn" msprop:Generator_UserColumnName="Credito" type="xs:double" />
+              <xs:element name="Numero" msprop:Generator_ColumnVarNameInTable="columnNumero" msprop:Generator_ColumnPropNameInRow="Numero" msprop:Generator_ColumnPropNameInTable="NumeroColumn" msprop:Generator_UserColumnName="Numero" type="xs:int" />
+              <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Auxiliar" msprop:Generator_ColumnVarNameInTable="columnAuxiliar" msprop:Generator_ColumnPropNameInRow="Auxiliar" msprop:Generator_ColumnPropNameInTable="AuxiliarColumn" msprop:Generator_UserColumnName="Auxiliar" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="150" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TipoDocumento" msprop:Generator_ColumnVarNameInTable="columnTipoDocumento" msprop:Generator_ColumnPropNameInRow="TipoDocumento" msprop:Generator_ColumnPropNameInTable="TipoDocumentoColumn" msprop:Generator_UserColumnName="TipoDocumento" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Cuentas" msprop:Generator_TableClassName="CuentasDataTable" msprop:Generator_TableVarName="tableCuentas" msprop:Generator_RowChangedName="CuentasRowChanged" msprop:Generator_TablePropName="Cuentas" msprop:Generator_RowDeletingName="CuentasRowDeleting" msprop:Generator_RowChangingName="CuentasRowChanging" msprop:Generator_RowEvHandlerName="CuentasRowChangeEventHandler" msprop:Generator_RowDeletedName="CuentasRowDeleted" msprop:Generator_RowClassName="CuentasRow" msprop:Generator_UserTableName="Cuentas" msprop:Generator_RowEvArgName="CuentasRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BarCode" msprop:Generator_ColumnVarNameInTable="columnBarCode" msprop:Generator_ColumnPropNameInRow="BarCode" msprop:Generator_ColumnPropNameInTable="BarCodeColumn" msprop:Generator_UserColumnName="BarCode" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="EntradaID" msprop:Generator_ColumnVarNameInTable="columnEntradaID" msprop:Generator_ColumnPropNameInRow="EntradaID" msprop:Generator_ColumnPropNameInTable="EntradaIDColumn" msprop:Generator_UserColumnName="EntradaID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Entradas" />
+      <xs:field xpath="mstns:EntradaID" />
+    </xs:unique>
+    <xs:unique name="CuentasKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Cuentas" />
+      <xs:field xpath="mstns:EntradaID" />
+    </xs:unique>
+    <xs:keyref name="Entradas_Cuentas" refer="Constraint1" msdata:ConstraintOnly="true" msdata:UpdateRule="None" msdata:DeleteRule="None">
+      <xs:selector xpath=".//mstns:Cuentas" />
+      <xs:field xpath="mstns:EntradaID" />
+    </xs:keyref>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Entradas_DetalleEntradas" msdata:parent="Entradas" msdata:child="DetalleEntradas" msdata:parentkey="EntradaID" msdata:childkey="EntradaID" msprop:Generator_UserChildTable="DetalleEntradas" msprop:Generator_ChildPropName="GetDetalleEntradasRows" msprop:Generator_UserRelationName="Entradas_DetalleEntradas" msprop:Generator_ParentPropName="EntradasRow" msprop:Generator_RelationVarName="relationEntradas_DetalleEntradas" msprop:Generator_UserParentTable="Entradas" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

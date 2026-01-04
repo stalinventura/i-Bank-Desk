@@ -1,0 +1,43 @@
+﻿<Window x:Class="Payment.Bank.View.Formularios.frmShutdown" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="titleAplications" 
+    Height="450" Width="700" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" BorderBrush="{StaticResource BackgroundHeader}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  ShowInTaskbar="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="{StaticResource BackgroundHeader}" Grid.Row="0" Grid.ColumnSpan="3" Stroke="Black" Margin="-2,-2,-2, -2"/>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="210"/>
+            </Grid.RowDefinitions>
+            <Grid Name="gridDatosPersonales" Margin="10,10,10,8" Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="msgTitle"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>
+                <Separator Height="45" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="lblMessage" HorizontalAlignment="Left" Margin="115,110,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="14"  Width="503" Height="104"/>
+                <Image Height="139" Margin="10,75,535,181" x:Name="MessageIcon" Source="/Payment.Bank;component/Controles/Icon/Alert.png" Stretch="Uniform" VerticalAlignment="Center" />
+                <TextBox x:Name="lblKey" HorizontalAlignment="Left" IsReadOnly="True" BorderThickness="0" VerticalContentAlignment="Center" BorderBrush="Transparent" Margin="114,219,0,0" TextWrapping="Wrap" Text="" TextAlignment="Center" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"  Width="504" Height="44"/>
+                <TextBlock x:Name="lblContador" HorizontalAlignment="Right" Margin="0,37,10,0" TextWrapping="Wrap" Text="" TextAlignment="Right" VerticalAlignment="Top" FontSize="32" Foreground="Red" FontWeight="Bold"  Width="59" Height="44"/>
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Name="spButton" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="2">
+            <Button Height="55" Width="55" Margin="0" Name="btnAceptar"  IsDefault="True" TabIndex="36">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False" TabIndex="37">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Column="1" TextWrapping="Wrap" Text="titleShutdown" Foreground="White" FontSize="18" VerticalAlignment="Top" Width="297" Height="24"/>
+    </Grid>
+</Window>

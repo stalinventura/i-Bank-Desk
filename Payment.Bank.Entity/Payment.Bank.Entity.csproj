@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4C8D934-AB31-478A-9031-BC7859AD57A7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Payment.Bank.Entity</RootNamespace>
+    <AssemblyName>Payment.Bank.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsAlguacilesBE.cs" />
+    <Compile Include="clsApartamentosBE.cs" />
+    <Compile Include="clsPaquetesBE.cs" />
+    <Compile Include="clsDetalleArqueosBE.cs" />
+    <Compile Include="clsAuxiliaresBE.cs" />
+    <Compile Include="clsCajasBE.cs" />
+    <Compile Include="clsArqueosBE.cs" />
+    <Compile Include="clsUsuariosRutasBE.cs" />
+    <Compile Include="clsTurnosBE.cs" />
+    <Compile Include="clsTipoDenominacionesBE.cs" />
+    <Compile Include="clsDenominacionesBE.cs" />
+    <Compile Include="clsTipoEntradasBE.cs" />
+    <Compile Include="clsTipoGeolocalizacionesBE.cs" />
+    <Compile Include="clsCopiasBE.cs" />
+    <Compile Include="clsAlquileresBE.cs" />
+    <Compile Include="clsActosBE.cs" />
+    <Compile Include="clsBancosBE.cs" />
+    <Compile Include="clsContabilizacionesBE.cs" />
+    <Compile Include="clsDependientesBE.cs" />
+    <Compile Include="clsDetalleJornadasBE.cs" />
+    <Compile Include="clsDetalleNominasBE.cs" />
+    <Compile Include="clsEmpleadosBE.cs" />
+    <Compile Include="clsGarantiaComercialesBE.cs" />
+    <Compile Include="clsGarantiaTarjetasBE.cs" />
+    <Compile Include="clsComerciosBE.cs" />
+    <Compile Include="clsNominasBE.cs" />
+    <Compile Include="clsParentescosBE.cs" />
+    <Compile Include="clsPasarelasBE.cs" />
+    <Compile Include="clsProcesadoresBE.cs" />
+    <Compile Include="clsPuestosBE.cs" />
+    <Compile Include="clsZonasBE.cs" />
+    <Compile Include="clsTipoEmpresasBE.cs" />
+    <Compile Include="clsJornadasBE.cs" />
+    <Compile Include="clsDiasBE.cs" />
+    <Compile Include="clsDispositivosBE.cs" />
+    <Compile Include="clsPlanesBE.cs" />
+    <Compile Include="clsFirmasBE.cs" />
+    <Compile Include="clsHistorialCartasBE.cs" />
+    <Compile Include="clsDetalleDesembolsosBE.cs" />
+    <Compile Include="clsDetalleSolicitudChequesBE.cs" />
+    <Compile Include="clsEstadoSolictudChequesBE.cs" />
+    <Compile Include="clsDesembolsosBE.cs" />
+    <Compile Include="clsAbogadosBE.cs" />
+    <Compile Include="clsGeolocalizacionesBE.cs" />
+    <Compile Include="clsSms.cs" />
+    <Compile Include="clsSolicitudChequesBE.cs" />
+    <Compile Include="clsDetallePagoRentasBE.cs" />
+    <Compile Include="clsEdificiosBE.cs" />
+    <Compile Include="clsGarantiaAlquileresBE.cs" />
+    <Compile Include="clsPisosBE.cs" />
+    <Compile Include="clsPagoRentasBE.cs" />
+    <Compile Include="clsRentasBE.cs" />
+    <Compile Include="clsServiciosBE.cs" />
+    <Compile Include="clsCuentasBE.cs" />
+    <Compile Include="clsInstitucionesBE.cs" />
+    <Compile Include="clsRutasBE.cs" />
+    <Compile Include="clsImpresionesBE.cs" />
+    <Compile Include="clsChequesBE.cs" />
+    <Compile Include="clsTipoApartamentosBE.cs" />
+    <Compile Include="clsTipoAlquileresBE.cs" />
+    <Compile Include="clsObjetivosBE.cs" />
+    <Compile Include="clsTipoGruposBE.cs" />
+    <Compile Include="clsTipoImpresionesBE.cs" />
+    <Compile Include="clsTipoDocumentosBE.cs" />
+    <Compile Include="clsTipoTransaccionesBE.cs" />
+    <Compile Include="clsTransaccionesBE.cs" />
+    <Compile Include="clsTipoCuentasBE.cs" />
+    <Compile Include="clsTipoTareasBE.cs" />
+    <Compile Include="clsTareasBE.cs" />
+    <Compile Include="clsCorreosBE.cs" />
+    <Compile Include="clsComprobantesBE.cs" />
+    <Compile Include="clsDetalleRecibosBE.cs" />
+    <Compile Include="clsFormaPagosBE.cs" />
+    <Compile Include="clsLlamadas.cs" />
+    <Compile Include="clsCartasBE.cs" />
+    <Compile Include="clsRecibosBE.cs" />
+    <Compile Include="clsDetalleNotaCreditosBE.cs" />
+    <Compile Include="clsDetalleNotaDebitosBE.cs" />
+    <Compile Include="clsGarantiaPersonalBE.cs" />
+    <Compile Include="clsGarantesBE.cs" />
+    <Compile Include="clsCuentaControlBE.cs" />
+    <Compile Include="clsCuotasBE.cs" />
+    <Compile Include="clsCondicionesBE.cs" />
+    <Compile Include="clsContratosBE.cs" />
+    <Compile Include="clsDetalleEntradasBE.cs" />
+    <Compile Include="clsEntradasBE.cs" />
+    <Compile Include="clsEstadoContratosBE.cs" />
+    <Compile Include="clsEstadoSolicitudesBE.cs" />
+    <Compile Include="clsOficialesBE.cs" />
+    <Compile Include="clsGarantiaHipotecariaBE.cs" />
+    <Compile Include="clsGarantiaVehiculosBE.cs" />
+    <Compile Include="clsGerentesBE.cs" />
+    <Compile Include="clsGruposBE.cs" />
+    <Compile Include="clsModelosBE.cs" />
+    <Compile Include="clsNotariosPublicoBE.cs" />
+    <Compile Include="clsConfiguracion.cs" />
+    <Compile Include="clsMarcasBE.cs" />
+    <Compile Include="clsColoresBE.cs" />
+    <Compile Include="clsCertificados.cs" />
+    <Compile Include="clsMonedasBE.cs" />
+    <Compile Include="clsDetalleCertificadosBE.cs" />
+    <Compile Include="clsServidoresBE.cs" />
+    <Compile Include="clsTipoCertificadosBE.cs" />
+    <Compile Include="clsSolicitudesBE.cs" />
+    <Compile Include="clsDatosEconomicosBE.cs" />
+    <Compile Include="clsHorariosBE.cs" />
+    <Compile Include="clsIngresosBE.cs" />
+    <Compile Include="clsOcupacionesBE.cs" />
+    <Compile Include="clsPaisesBE.cs" />
+    <Compile Include="clsProvinciasBE.cs" />
+    <Compile Include="clsCiudadesBE.cs" />
+    <Compile Include="clsClientesBE.cs" />
+    <Compile Include="clsEmpresasBE.cs" />
+    <Compile Include="clsEstadosCivilesBE.cs" />
+    <Compile Include="clsEtiquetasBE.cs" />
+    <Compile Include="clsGraficosBE.cs" />
+    <Compile Include="clsLenguajesBE.cs" />
+    <Compile Include="clsOperadoresBE.cs" />
+    <Compile Include="clsPermisosBE.cs" />
+    <Compile Include="clsPermisosRolesBE.cs" />
+    <Compile Include="clsPersonasBE.cs" />
+    <Compile Include="clsPreguntasBE.cs" />
+    <Compile Include="clsProductosBE.cs" />
+    <Compile Include="clsReferenciasBE.cs" />
+    <Compile Include="clsRolesBE.cs" />
+    <Compile Include="clsSexosBE.cs" />
+    <Compile Include="clsSubCuentaControlBE.cs" />
+    <Compile Include="clsSubGruposBE.cs" />
+    <Compile Include="clsSucursalesBE.cs" />
+    <Compile Include="clsTipoReferenciasBE.cs" />
+    <Compile Include="clsTipoCartasBE.cs" />
+    <Compile Include="clsTipoVehiculosBE.cs" />
+    <Compile Include="clsTipoContratosBE.cs" />
+    <Compile Include="clsTipoMovimientosBE.cs" />
+    <Compile Include="clsTipoSolicitudesBE.cs" />
+    <Compile Include="clsFotografiasBE.cs" />
+    <Compile Include="clsListaNegraBE.cs" />
+    <Compile Include="clsUsuariosBE.cs" />
+    <Compile Include="OperationResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

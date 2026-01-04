@@ -1,0 +1,126 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.View.Formularios.frmCondiciones" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="titleCondition" 
+    ShowTitleBar="True" TitlebarHeight="60" ShowIconOnTitleBar="True" TitleAlignment="Left" Height="600" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalContentAlignment="Right"  Grid.Column="1" Grid.Row="0" Margin="0, 0, 0, 10" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid Grid.Column="1" Name="gridCondiciones" DataContext="{Binding}">
+                <TextBox  x:Name="txtInteres"  Text="{Binding Interes, StringFormat=N3, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="10,213,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TabIndex="1"/>
+                <TextBox  x:Name="txtComision" Text="{Binding Comision, StringFormat=N3, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="10,269,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="177" TabIndex="2"/>
+
+                <TextBlock HorizontalAlignment="Left" Margin="10,190,0,0" TextWrapping="Wrap" Text="lblInterestRate" VerticalAlignment="Top" Width="153"/>
+                <TextBlock  Margin="14,246,0,0" TextWrapping="Wrap" Text="lblRateCommission" VerticalAlignment="Top" HorizontalAlignment="Left" Width="188"/>
+                <TextBlock HorizontalAlignment="Left" Margin="12,23,0,0" TextWrapping="Wrap" Text="lblDefaultValue" VerticalAlignment="Top" Width="400"/>
+                <RadioButton x:Name="rbDefault_Si" Content="Si" HorizontalAlignment="Left" Margin="20,48,0,0" VerticalAlignment="Top" TabIndex="0"  GroupName="Default" />
+                <RadioButton x:Name="rbDefault_No" Content="No" HorizontalAlignment="Left" Margin="73,49,0,0" VerticalAlignment="Top" IsChecked="True" TabIndex="1" GroupName="Default" />
+
+
+
+                <Frame BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,304,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridLegal">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblLegalExpenses" VerticalAlignment="Top" Width="206" Margin="10,10,0,0"/>
+                            <TextBlock TextWrapping="Wrap" Text="lblLegalRate" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Margin="249,10,0,0"/>
+                            <RadioButton x:Name="rbLegal_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4"  GroupName="Legal" RenderTransformOrigin="0.518,1.433"  />
+                            <RadioButton x:Name="rbLegal_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" TabIndex="5" GroupName="Legal"  />
+                            <TextBox IsEnabled="False" x:Name="txtLegal" Text="{Binding Legal, Mode=OneWay, StringFormat=N3, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="249,31,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TabIndex="3"/>
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+                <Frame  BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,376,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridSeguro">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblHaveInsurance" VerticalAlignment="Top" Width="206" Margin="10,10,0,0"/>
+                            <TextBlock TextWrapping="Wrap" Text="lblInsuranceRate" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Margin="249,10,0,0"/>
+                            <RadioButton x:Name="rbInsurance_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4"  GroupName="Insurance" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbInsurance_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="True" TabIndex="5" GroupName="Insurance"/>
+                            <TextBox IsEnabled="False" x:Name="txtTasaSeguro" Text="{Binding Seguro, Mode=OneWay, StringFormat=N3, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="249,31,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="151" TabIndex="4"/>
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+                <Frame  BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,448,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridMoraAutomaticas">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblMoraAutomatically" VerticalAlignment="Top" Width="206" Margin="10,10,0,0"/>
+                            <TextBlock TextWrapping="Wrap" Text="lblLateFees" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Margin="249,10,0,0"/>
+                            <TextBlock TextWrapping="Wrap" Text="lblDaysGrace" VerticalAlignment="Top" HorizontalAlignment="Left" Width="151" Margin="330,10,0,0"/>
+
+                            <RadioButton x:Name="rbMorasAut_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4" IsChecked="True" GroupName="Moras" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbMorasAut_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" TabIndex="5" GroupName="Moras" />
+                            <TextBox IsEnabled="False" x:Name="txtMoras" Text="{Binding Mora, Mode=OneWay, StringFormat=N2, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="249,31,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TabIndex="5"/>
+                            <TextBox IsEnabled="False" x:Name="txtDiasGracia" Text="{Binding DiasGracia, Mode=OneWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="328,31,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="72" TabIndex="6" RenderTransformOrigin="0.18,0.62"/>
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+
+                <Frame  BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,520,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridCartas">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblGenerateLetterDelay" VerticalAlignment="Top" Width="390" Margin="10,10,0,0"/>
+                            <RadioButton x:Name="rbCartas_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4" IsChecked="True" GroupName="Cartas" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbCartas_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="False" TabIndex="5" GroupName="Cartas" />
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+
+                <Frame  BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,592,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridDataCredito">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblShowCommission" VerticalAlignment="Top" Width="206" Margin="10,10,0,0"/>
+                            <RadioButton x:Name="rbComision_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4" IsChecked="False" GroupName="Comision" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbComision_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="True" TabIndex="5" GroupName="Comision" />
+
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblDataCredit" VerticalAlignment="Top" Width="206" Margin="249,10,0,0"/>
+                            <RadioButton x:Name="rbDataCredito_Si" Content="Si" Margin="249,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4" IsChecked="True" GroupName="DataCredito" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbDataCredito_No" Content="No" Margin="308,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" TabIndex="5" GroupName="DataCredito" />
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+
+                <Frame  BorderBrush="LightGray" BorderThickness="0.5" HorizontalAlignment="Left" Height="67" Margin="10,664,0,0" VerticalAlignment="Top" Width="443">
+                    <Frame.Content>
+                        <Grid Margin="0,0" x:Name="gridBank">
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblGenerateBankRequest" VerticalAlignment="Top" Width="206" Margin="10,10,0,0"/>
+                            <RadioButton x:Name="rbBankRequest_Si" Content="Si" Margin="10,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" TabIndex="4" IsChecked="False" GroupName="BankRequest" RenderTransformOrigin="0.518,1.433" />
+                            <RadioButton x:Name="rbBankRequest_No" Content="No" Margin="59,34,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"  IsChecked="True" TabIndex="5" GroupName="BankRequest" />
+
+                            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="lblBank" VerticalAlignment="Top" Width="206" Margin="249,10,0,0"/>
+                            <ComboBox x:Name="cmbBancos" IsEnabled="False" SelectedValue="{Binding BancoID, Mode=OneWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="249,31,9,0" VerticalAlignment="Top" Height="25" TabIndex="56"/>
+
+                        </Grid>
+                    </Frame.Content>
+                </Frame>
+
+
+                <TextBlock HorizontalAlignment="Left" Margin="12,79,0,0" TextWrapping="Wrap" Text="lblSendSMS" VerticalAlignment="Top" Width="400"/>
+                <RadioButton x:Name="rbSendSMS_Si" Content="Si" HorizontalAlignment="Left" Margin="20,104,0,0" VerticalAlignment="Top" TabIndex="0"  GroupName="SendSMS" />
+                <RadioButton x:Name="rbSendSMS_No" Content="No" HorizontalAlignment="Left" Margin="73,105,0,0" VerticalAlignment="Top" IsChecked="True" TabIndex="1" GroupName="SendSMS" />
+                <TextBox  x:Name="txtTiempo" Text="{Binding Tiempo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="10,154,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="177" TabIndex="0"/>
+                <TextBlock HorizontalAlignment="Left" Margin="10,131,0,0" TextWrapping="Wrap" Text="lblTiempo" VerticalAlignment="Top" Width="153"/>
+               </Grid>
+        </ScrollViewer>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="1" Width="110">
+            <Button Height="55" Margin="0" Name="btnAceptar" Width="55" IsDefault="False" TabIndex="10">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False" TabIndex="11">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+
+</Controls:MetroWindow>

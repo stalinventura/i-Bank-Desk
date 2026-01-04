@@ -1,0 +1,292 @@
+﻿SELECT @Hasta as Hasta,  Contratos.ContratoID, Contratos.Fecha, Contratos.Vence, Personas.Documento, Upper( CONCAT(Personas.Nombres, ' ', Personas.Apellidos)) AS Clientes, Empresas.Empresa, Empresas.Rnc,Empresas.Siglas,  Sucursales.Direccion, Sucursales.Telefonos,
+                         Personas.Telefono, Personas.Celular, Ciudades.Ciudad, Provincias.Provincia, Condiciones.Condicion, TipoContratos.TipoContrato, Contratos.Interes, Solicitudes.Tiempo, Sucursales.Sucursal, Upper( CONCAT(P.Nombres, ' ', P.Apellidos)) AS Oficial, Rutas.Ruta,
+						 
+                      round( Solicitudes.Monto +   Solicitudes.Monto * (((Contratos.Comision) / 100) ),0)
+						 
+						 AS Monto, Contratos.Cuota,
+
+
+
+
+CASE WHEN 
+
+CASE WHEN 
+(
+SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaCreditos AS NC
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                 FROM            Recibos AS R INNER JOIN
+                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                              (SELECT        CuotaID
+                                                                FROM            Cuotas AS c11
+                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Balance
+FROM            Cuotas AS C
+WHERE        (ContratoID = Contratos.ContratoID)
+) < 0 THEN 0 ELSE
+
+(
+SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                               FROM            DetalleNotaCreditos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaCreditos AS NC
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                 FROM            Recibos AS R INNER JOIN
+                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                              (SELECT        CuotaID
+                                                                FROM            Cuotas AS c11
+                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Balance
+FROM            Cuotas AS C
+WHERE        (ContratoID = Contratos.ContratoID)
+)
+END < 1 THEN 0
+ELSE
+                             (SELECT        COUNT(CuotaID) AS Cantidad
+                               FROM            Cuotas AS C
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND (Capital + Comision + Interes + Mora + Legal + IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID = C.CuotaID)) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID = C.CuotaID)) END, 0) - IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID = C.CuotaID)) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaCreditos AS NC
+                                                               WHERE        (CuotaID = C.CuotaID)) END, 0) - IFNULL
+                                                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                                                 FROM            Recibos AS R INNER JOIN
+                                                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                                                 WHERE        (R.EstadoID = 1) AND (DR.CuotaID = C.CuotaID)), 0) > 1)) 
+																 
+		END AS Cantidad,
+																 
+								 
+						round(	 IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + 
+							 
+							 IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) 
+																							   
+																							   - IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                                                               FROM            DetalleNotaCreditos AS NC
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaCreditos AS NC
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                                                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                                                 FROM            Recibos AS R INNER JOIN
+                                                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS c11
+                                                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Atraso
+                               FROM            Cuotas AS C
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta)) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaDebitos AS ND
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL(CASE WHEN
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                                                               FROM            DetalleNotaCreditos AS NC
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                                                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                                                               FROM            DetalleNotaCreditos AS NC
+                                                               WHERE        (CuotaID IN
+                                                                                             (SELECT        CuotaID
+                                                                                               FROM            Cuotas AS c11
+                                                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                                                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                                                 FROM            Recibos AS R INNER JOIN
+                                                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS c11
+                                                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Atraso
+                               FROM            Cuotas AS C
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta)) END, 0) ,2)
+							  
+  							   
+							    AS Atraso,
+
+
+CASE
+WHEN
+
+CASE WHEN 
+(
+SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaCreditos AS NC
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                 FROM            Recibos AS R INNER JOIN
+                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                              (SELECT        CuotaID
+                                                                FROM            Cuotas AS c11
+                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Balance
+FROM            Cuotas AS C
+WHERE        (ContratoID = Contratos.ContratoID)
+) < 0 THEN 0 ELSE
+
+(
+SELECT        SUM(Capital + Comision + Interes + Mora + Legal) + IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS ND
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL(CASE WHEN
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS NC
+                               FROM            DetalleNotaDebitos AS ND
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) < 0 THEN 0 ELSE
+                             (SELECT        SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1
+                               FROM            DetalleNotaCreditos AS NC
+                               WHERE        (CuotaID IN
+                                                             (SELECT        CuotaID
+                                                               FROM            Cuotas AS c11
+                                                               WHERE        Vence <= @Hasta AND ContratoID = Contratos.ContratoID))) END, 0) - IFNULL
+                             ((SELECT        SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado
+                                 FROM            Recibos AS R INNER JOIN
+                                                          DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID
+                                 WHERE        (R.EstadoID = 1) AND (R.Fecha <= @Hasta) AND (DR.CuotaID IN
+                                                              (SELECT        CuotaID
+                                                                FROM            Cuotas AS c11
+                                                                WHERE        (Vence <= @Hasta) AND (ContratoID = Contratos.ContratoID)))), 0) AS Balance
+FROM            Cuotas AS C
+WHERE        (ContratoID = Contratos.ContratoID)
+)
+END <= 10 THEN 'S' 
+
+
+WHEN (SELECT COUNT(CuotaID) AS Cantidad FROM Cuotas AS C WHERE (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND (Capital + Comision + Interes + Mora + Legal + IFNULL(CASE WHEN (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS ND FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM  DetalleNotaDebitos AS ND  WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL(CASE WHEN (SELECT  SUM(Capital + Comision + Interes + Mora + Legal) AS NC FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM DetalleNotaCreditos AS NC WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL ((SELECT SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado FROM Recibos AS R INNER JOIN DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID WHERE (R.EstadoID = 1) AND (DR.CuotaID = C.CuotaID)), 0) > 1)) < 1 THEN 'N' 
+WHEN (SELECT COUNT(CuotaID) AS Cantidad FROM Cuotas AS C WHERE (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND (Capital + Comision + Interes + Mora + Legal + IFNULL(CASE WHEN (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS ND FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM  DetalleNotaDebitos AS ND  WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL(CASE WHEN (SELECT  SUM(Capital + Comision + Interes + Mora + Legal) AS NC FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM DetalleNotaCreditos AS NC WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL ((SELECT SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado FROM Recibos AS R INNER JOIN DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID WHERE (R.EstadoID = 1) AND (DR.CuotaID = C.CuotaID)), 0) > 1)) <= 3 THEN 'M' 
+WHEN (SELECT COUNT(CuotaID) AS Cantidad FROM Cuotas AS C WHERE (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND (Capital + Comision + Interes + Mora + Legal + IFNULL(CASE WHEN (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS ND FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM  DetalleNotaDebitos AS ND  WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL(CASE WHEN (SELECT  SUM(Capital + Comision + Interes + Mora + Legal) AS NC FROM DetalleNotaDebitos AS ND WHERE (CuotaID = C.CuotaID)) < 1 THEN 0 ELSE (SELECT SUM(Capital + Comision + Interes + Mora + Legal) AS Expr1 FROM DetalleNotaCreditos AS NC WHERE (CuotaID = C.CuotaID)) END, 0) - IFNULL ((SELECT SUM(DR.Capital + DR.Comision + DR.Interes + DR.Mora + DR.Legal) AS Pagado FROM Recibos AS R INNER JOIN DetalleRecibos AS DR ON R.ReciboID = DR.ReciboID WHERE (R.EstadoID = 1) AND (DR.CuotaID = C.CuotaID)), 0) > 1)) <= 5 THEN 'L' 
+ELSE
+'C'
+END AS Status
+
+FROM            Contratos INNER JOIN
+                         Solicitudes ON Contratos.SolicitudID = Solicitudes.SolicitudID INNER JOIN
+                         Clientes ON Solicitudes.ClienteID = Clientes.ClienteID INNER JOIN
+                         Personas ON Clientes.Documento = Personas.Documento INNER JOIN
+                         Condiciones ON Solicitudes.CondicionID = Condiciones.CondicionID INNER JOIN
+                         Ciudades ON Ciudades.CiudadID = Personas.CiudadID INNER JOIN
+                         Provincias ON Provincias.ProvinciaID = Ciudades.ProvinciaID INNER JOIN
+                         TipoContratos ON Contratos.TipoContratoID = TipoContratos.TipoContratoID INNER JOIN
+                         Sucursales ON Clientes.SucursalID = Sucursales.SucursalID INNER JOIN 
+                         Empresas on Sucursales.EmpresaID  = Empresas.empresaid INNER JOIN 
+                         Oficiales on Contratos.OficialID = Oficiales.OficialID INNER JOIN 
+                         Personas as P on Oficiales.Documento = P.Documento  INNER JOIN 
+                         Zonas on Contratos.ZonaID = Zonas.ZonaID INNER JOIN
+                         Rutas on Zonas.RutaID = Rutas.RutaID 
+WHERE        (Contratos.EstadoID = 1) AND (Contratos.Fecha <= @Hasta) and (Personas.Documento not in (select Documento from ListaNegra)) 
+

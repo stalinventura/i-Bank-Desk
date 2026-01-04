@@ -1,0 +1,33 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.View.Formularios.frmBitacoras" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="titleMessage" 
+    ShowTitleBar="True" TitlebarHeight="60" ShowIconOnTitleBar="True" TitleAlignment="Left" Height="550" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1" Name="gridSms" DataContext="{Binding}">
+            <TextBox Height="23" Margin="10,95,20,0" Name="txtNombres" MaxLength="100" Text="{Binding Path=HableCon, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" />
+            <TextBox Margin="10,153,20,11" x:Name="txtMensaje" MaxLength="500"  TextWrapping="WrapWithOverflow" Text="{Binding Mensaje, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" />
+            <DatePicker Height="23" Margin="10,38,20,0" x:Name="txtFecha" Text="{Binding Fecha, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" />
+
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,72,0,0" Text="lblNames" VerticalAlignment="Top" Width="155" />
+
+            <TextBlock Height="22" HorizontalAlignment="Left" Margin="10,126,0,0"  Text="lblMessage" VerticalAlignment="Top" Width="155" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,18,0,0" Text="lblDate" VerticalAlignment="Top" Width="155" />
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="1" Width="110">
+            <Button Height="55" Margin="0" Name="btnAceptar" Width="55" IsDefault="True">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

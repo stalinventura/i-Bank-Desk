@@ -1,0 +1,21 @@
+%YAML 1.2
+---
+libraries: 
+  ios-unified: ../lib/ios/Awesome.dll
+icons: 
+  - C:\Users\Stalin\OneDrive\App Developer\Payment Bank_128x128.png
+  - C:\Users\Stalin\OneDrive\App Developer\Payment Bank_512x512.png
+version: Components
+details: Details.md
+getting-started: GettingStarted.md
+samples: 
+  iOS Sample: ../samples/AwesomeSample/AwesomeSample.sln
+id: C:\Users\Stalin\OneDrive\App Developer\Payment Bank
+summary: Components
+publisher-url: Components
+license: License.md
+screenshots: 
+  - screenshots/screenshot1.png
+name: Components
+publisher: Components
+...

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<root>
+    <Payment>
+        <ResponseCode>00</ResponseCode>
+        <ResponseMessage></ResponseMessage>
+        <Amount>RD$3,000.00</Amount>
+        <ResponseAction></ResponseAction>
+    </Payment>
+</root>

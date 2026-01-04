@@ -1,0 +1,211 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.View.Consultas.frmConsultasContratos" 
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:local="clr-namespace:Payment.Bank.Helpers"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="titleQueriesContract" ShowTitleBar="True" TitlebarHeight="60" ShowIconOnTitleBar="True" TitleAlignment="Left" Height="450" Width="900" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <local:ContratosColorConverter x:Key="ContratosColorConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+    
+        <Grid Name="gridMenu" Width="Auto" Background="Transparent" Grid.Column="1" Margin="0,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="200*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <DataGrid AutoGenerateColumns="False" Margin="10,10,-5,26" VerticalScrollBarVisibility="Visible" CanUserAddRows="False" CanUserDeleteRows="False" Name="dataGrid1" Grid.Row="1" HeadersVisibility="Column" HorizontalScrollBarVisibility="Hidden" SelectionChanged="dataGrid1_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="colNumber" x:Name="colNumber" Width="82">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ContratoID,StringFormat=000000}" TextAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colDate" x:Name="colDate" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Fecha,StringFormat=dd/MM/yyyy}" TextAlignment="Left" VerticalAlignment="Center">
+                                      <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colNames" x:Name="colNames" Width="800*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Completo}" TextAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colTypeApplication" x:Name="colTypeApplication" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=TipoSolicitud}" TextAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colTime" x:Name="colTime" Width="75">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Tiempo}" TextAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colCondition" x:Name="colCondition" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Condicion}" TextAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colAmount" Width="90" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Monto,StringFormat=N2}" TextAlignment="Right" VerticalAlignment="Center">
+                                    <TextBlock.Foreground>
+                                        <MultiBinding Converter="{StaticResource ContratosColorConverter}">
+                                            <Binding Path="Vence" />
+                                            <Binding Path="EstadoID" />
+                                        </MultiBinding>
+                                    </TextBlock.Foreground>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Foreground="{StaticResource BackgroundHeader}" FontWeight="Bold" Name="lblTotal" Text="TOTAL:" Grid.Row="1" HorizontalAlignment="Left" Width="190" Margin="12,0,0,0" Height="21" VerticalAlignment="Bottom" />
+            <TextBlock Foreground="{StaticResource BackgroundHeader}" FontWeight="Bold" Name="lblMonto" Text="0.00" Grid.Row="1" HorizontalAlignment="Right" TextAlignment="Right" Width="190" Margin="12,0,15,0" Height="21" VerticalAlignment="Bottom" />
+
+            <TextBox Height="25" Margin="12,10,0,0" Name="txtBuscar" VerticalAlignment="Top" HorizontalAlignment="Left" Width="400"/>
+            <ComboBox x:Name="cmbEstadoContratos" HorizontalAlignment="Right" Margin="0,10,10,0" Width="212" TabIndex="2"  Height="30" VerticalAlignment="Top"/>
+
+            <Grid x:Name="Menu" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Height="70" VerticalAlignment="Top" Width="Auto" HorizontalAlignment="Left">
+                    <Button Height="55" Width="55" Margin="0" HorizontalAlignment="Left" Name="btnAgregar" VerticalAlignment="Top">
+                        <Image Width="40" Height="40" Source="/Images/add.png"/>
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0" Name="btnEditar" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Image Width="40" Height="40" Source="/Images/Edit.png"/>
+                    </Button>
+                    <!--<Button Height="55" Width="55" Margin="0"  Name="btnPrint" VerticalAlignment="Top" HorizontalAlignment="Left" Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/Print.png"/>
+                    </Button>-->
+
+
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,15,0" Grid.Column="1" Height="70" VerticalAlignment="Top">
+                    <Button Height="55" ToolTip="Estado de Cuentas" Width="55" HorizontalAlignment="Left" Name="btnEstadoCuentas" VerticalAlignment="Top" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/Images/Estados.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Contratos" Width="55" HorizontalAlignment="Left" Margin="0" Name="btnContratos" VerticalAlignment="Top" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/Images/Contratos.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Cuotas" HorizontalAlignment="Left" Margin="0" Name="btnCuotas" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/Images/Cuotas.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Tarjeta" HorizontalAlignment="Left" Margin="0" Name="btnTarjetas" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/Images/appbar_profile.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Lista Negra" HorizontalAlignment="Left" Margin="0" Name="btnBlackList" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="45" Height="45" Source="/Images/favs.addto.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Cartas" HorizontalAlignment="Left" Margin="0" Name="btnCartas" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="45" Height="45" Source="/Images/mail.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Bitacora de Llamadas" HorizontalAlignment="Left" Margin="0" Name="btnBitacora" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/i-Bank;component/Images/appbar_notification.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Mensajes SMS" HorizontalAlignment="Left" Margin="0" Name="btnSms" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="40" Height="40" Source="/Images/Message.png"/>
+                    </Button>
+                    <Button Height="55" ToolTip="Ubicación" HorizontalAlignment="Left" Margin="0" Name="btnLocation" VerticalAlignment="Top" Width="55" Visibility="Visible">
+                        <Image Width="55" Height="55" Source="/Images/appbar_location.png"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,15,0" Grid.Column="2" Height="70" VerticalAlignment="Top">
+                    <Button Height="55" Width="55" Margin="0" Name="btnBrowse" VerticalAlignment="Top" Grid.Column="2" Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/upload.png" />
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0"  Name="btnSearch" VerticalAlignment="Top" Grid.Column="2" Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/Search.png" />
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0"  Name="btnCamera" VerticalAlignment="Top" Grid.Column="2" Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/camera.png" />
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0" Name="btnSetting" VerticalAlignment="Top" Grid.Column="2"  Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/Settings.png" />
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0"  Name="btnAceptar" VerticalAlignment="Top" Grid.Column="2" Visibility="Collapsed">
+                        <Image Width="40" Height="40" Source="/Images/check.png" />
+                    </Button>
+                    <Button Height="55" Width="55" Margin="0" Name="btnDelete" VerticalAlignment="Top" Grid.Column="2">
+                        <Image Width="40" Height="40" Source="/Images/delete.png" />
+                    </Button>
+                    <Button  Height="55" Width="55" Margin="0" Name="btnSalir" VerticalAlignment="Top" Grid.Column="2">
+                        <Image Width="40" Height="40" Source="/Images/back.png" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Controls:ProgressRing Name="RadBusyIndicator" IsActive="False" Grid.Column="1" Foreground="{DynamicResource BackgroundHeader}"/>
+
+    </Grid>
+</Controls:MetroWindow>

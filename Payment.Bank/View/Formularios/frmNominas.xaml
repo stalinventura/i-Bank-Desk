@@ -1,0 +1,188 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.View.Formularios.frmNominas" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:local="clr-namespace:Payment.Bank.Helpers" Title="titlePayrolls" 
+    ShowTitleBar="True" TitlebarHeight="60" ShowIconOnTitleBar="True" TitleAlignment="Left"  Width="862" Height="700" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <local:ImageSourceConverter x:Key="ImageSourceConverter" />
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="0" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Grid Name="gridMenu" Grid.Row="0" Grid.Column="1" Width="Auto" Background="Transparent" Margin="0,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" MinHeight="50"/>
+                <RowDefinition Height="84" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid AutoGenerateColumns="False" Margin="10,0,10,0" Name="dataGrid1" Grid.Row="2" HeadersVisibility="Column" HorizontalScrollBarVisibility="Hidden" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="colEmployee" x:Name="colConcept" Width="230" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="Empleados.Personas.Nombres" />
+                                            <Binding Path="Empleados.Personas.Apellidos" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colSalary" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Sueldo,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colIncentive" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Comision,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colSfs" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=SFS,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colAfp" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=AFP,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colIsr" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=ISR,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colOthers" Width="80" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=Otros,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="colSubTotal" Width="*" IsReadOnly="True">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=SubTotal,StringFormat=N2}" Margin="0,0,5,0" TextAlignment="Right" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+            <Grid Margin="0,0,10,0" Grid.Row="3" Width="Auto" Name="gridOpciones" Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*"/>
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtSubTotal" FontSize="14" HorizontalAlignment="Right" Height="30" Margin="0,12,0,0" TextWrapping="Wrap"  TextAlignment="Right" Text="{Binding Path=SubTotal,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="140" TabIndex="10" Grid.Column="1" IsReadOnly="True"/>
+                <TextBox x:Name="txtDescuento" IsReadOnly="True" FontSize="14" HorizontalAlignment="Right" Height="30" Margin="0,45,0,0" TextWrapping="Wrap"  TextAlignment="Right" Text="{Binding Path=Descuento,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="140" TabIndex="10" Grid.Column="1"/>
+                <TextBox x:Name="txtTotal" FontSize="14" HorizontalAlignment="Right" Height="30" Margin="0,78,0,0" TextWrapping="Wrap" TextAlignment="Right" FontWeight="Bold"  Text="{Binding Path=Total,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  VerticalAlignment="Top" Width="140" TabIndex="10" Grid.Column="1" IsReadOnly="True"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,19,149,0" TextWrapping="Wrap" TextAlignment="Right" Text="lblSubTotal" VerticalAlignment="Top" Width="156" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,52,149,0" TextWrapping="Wrap" TextAlignment="Right" Text="lblDescuento" VerticalAlignment="Top" Width="156" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                <TextBlock HorizontalAlignment="Right" Margin="0,85,149,0" TextWrapping="Wrap" TextAlignment="Right" Text="lblTotal" VerticalAlignment="Top" Width="156" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                <Grid Grid.Column="0" Name="gridInformacion">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Expander Margin="10,10,10,0" Grid.Row="0" IsExpanded="True" Background ="{DynamicResource BackgroundHeader}" BorderBrush="{StaticResource BackgroundHeader}">
+                        <Expander.Header>
+                            lblInformation
+                        </Expander.Header>
+                        <Grid>
+                            <TextBox Margin="0" Name="txtInformacion" TextWrapping="Wrap" Height="80" BorderBrush="Transparent"/>
+                        </Grid>
+                    </Expander>
+                    <CheckBox x:Name="chkPreview" Content="lblPreview" IsChecked="True" VerticalAlignment="Top" Grid.Column="0" Margin="10,0,0,0" Grid.Row="1" />
+                </Grid>
+            </Grid>
+
+            <Grid Margin="0" Name="gridEncabezado" Grid.Row="0" Visibility="Visible">
+                <TextBox x:Name="txtCodigo" Height="30" IsReadOnly="True" Grid.Row="0"  TextWrapping="Wrap" Width="135" TabIndex="10" FontSize="14" Margin="110,34,578,0" VerticalAlignment="Top" />
+                <TextBox x:Name="txtNomina" Height="55"  VerticalContentAlignment="Center" IsReadOnly="True" Grid.Row="0"  TextWrapping="Wrap" Width="686" Margin="110,69,27,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="cmbBancos" Height="30" Visibility="Visible" SelectedValue="{Binding BancoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" TabIndex="3" Margin="112,129,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="283"/>
+
+                <DatePicker x:Name="txtFecha" Height="30" Grid.Row="0" HorizontalAlignment="Left" Margin="250,34,0,0" Width="143" TabIndex="22" FontSize="14" VerticalAlignment="Top"/>
+                <TextBlock Text="lblPayroll" Grid.Row="0" HorizontalAlignment="Left" Margin="9,73,0,0" TextAlignment="Right" TextWrapping="Wrap" Width="96" Height="16" VerticalAlignment="Top" />
+                <TextBlock Margin="9,42,0,0" Grid.Row="0"  TextWrapping="Wrap" TextAlignment="Right" Text="lblCode" HorizontalAlignment="Left" Width="96" Height="16" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="0" Visibility="Visible" HorizontalAlignment="Left" Margin="9,133,0,0" TextAlignment="Right" TextWrapping="Wrap" Width="96" Text="lblBank" Height="25" VerticalAlignment="Top"/>
+
+
+            </Grid>
+
+            <Grid Margin="0" Grid.Row="1" Name="gridDetalleCuotas">
+                <ComboBox x:Name="cmbEmpleado" SelectedValue="{Binding Path=EmpleadoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="30" Margin="11,38,0,0" VerticalAlignment="Top" Width="229" TabIndex="10" FontSize="14" RenderTransformOrigin="0.5,0.5"/>
+                <TextBox x:Name="txtSueldo"  Text="{Binding Path=Sueldo,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  IsReadOnly="True" HorizontalAlignment="Left" Height="30" Margin="240,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBox x:Name="txtComision"  Text="{Binding Path=Comision,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="30" Margin="320,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBox x:Name="txtSfs"  Text="{Binding Path=SFS,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="30" Margin="400,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBox x:Name="txtAfp"  Text="{Binding Path=AFP,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="30" Margin="480,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBox x:Name="txtIsr"  Text="{Binding Path=ISR,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="30" Margin="560,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBox x:Name="txtOtros" Text="{Binding Path=Otros,StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="30" Margin="640,38,0,0" TextWrapping="Wrap" TextAlignment="Right" VerticalAlignment="Top" Width="80" TabIndex="10" FontSize="14"/>
+                <TextBlock Text="colEmployee" HorizontalAlignment="Left" Margin="10,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64" Height="20"/>
+                <TextBlock Text="colSalary" HorizontalAlignment="Left" Margin="240,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="20"/>
+                <TextBlock Text="colIncentive" HorizontalAlignment="Left" Margin="320,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="78" Height="20"/>
+                <TextBlock Text="colSfs" HorizontalAlignment="Left" Margin="403,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="20"/>
+                <TextBlock Text="colAfp" HorizontalAlignment="Left" Margin="483,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="77" Height="20"/>
+                <TextBlock Text="colIsr" HorizontalAlignment="Left" Margin="560,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" Height="20"/>
+                <TextBlock Text="colOthers" HorizontalAlignment="Left" Margin="640,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" Height="20"/>
+
+                <Button x:Name="btnAdd" HorizontalAlignment="Left" Margin="724,30,0,14" Width="40" Height="40" TabIndex="37">
+                    <Image Width="30" Height="30" Source="/Images/download.png" />
+                </Button>
+                <Button x:Name="btnDelete" HorizontalAlignment="Left" Margin="760,30,0,14" Width="40" Height="40" TabIndex="37">
+                    <Image Width="30" Height="30" Source="/Images/delete.png" />
+                </Button>
+
+                <Separator Height="19" Margin="10,0,10,0" VerticalAlignment="Top" Grid.Row="1" Background="{StaticResource BackgroundHeader}"/>
+                <Separator Height="19" Margin="10,0,10,0" VerticalAlignment="Bottom" Grid.Row="1" Background="{StaticResource BackgroundHeader}"/>
+
+            </Grid>
+            <GroupBox Header="lblPaymentMode" BorderBrush="LightGray" Visibility="Visible" Background="Transparent" Margin="398,1,162,0" Width="263" Height="63" VerticalAlignment="Top">
+                <Grid x:Name="gridMode">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="rbMensual"   Content="lblMonthly"     IsChecked="True"  Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0"/>
+                    <RadioButton x:Name="rbQuincenal" Content="lblFortnightly" IsChecked="False" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0"/>
+                </Grid>
+            </GroupBox>
+            <CheckBox x:Name="chkDobleSueldo" Content="lblDoubleSalary" Margin="682,33,10,0" Visibility="Visible" HorizontalContentAlignment="Left" Height="28" VerticalAlignment="Top"/>
+
+        </Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Width="700">
+                <TextBlock x:Name="lblF1" Text="F1 = Estado de Cuentas" Foreground="Red" Visibility="Collapsed" FontWeight="Bold" Margin="0,0,30,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="lblF2" Text="F2 = Factura" Foreground="Red" Visibility="Collapsed" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Button Height="55" Margin="0" Name="btnAceptar" Width="55" IsDefault="False">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

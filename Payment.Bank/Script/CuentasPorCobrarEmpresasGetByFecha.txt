@@ -1,0 +1,157 @@
+﻿SELECT        Contratos.ContratoID, Contratos.Fecha, @Hasta AS Hasta, Contratos.Vence, CASE WHEN Contratos.VENCE < @Hasta THEN 'Si' ELSE '' END AS Vencido, Personas.Documento, Personas.Nombres, Personas.Apellidos, 
+                         Personas.Telefono, Personas.Celular, Solicitudes.Monto + Solicitudes.Monto * (Contratos.Comision / 100) AS Monto, CASE WHEN CONTRATOS.tipoContratoID = 3 THEN
+                             (SELECT        COUNT(CuotaID) AS Expr1
+                               FROM            Cuotas
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision + Interes, 0) } + { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaDebitos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleRecibos AS DR2
+                                                                 WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID) AND estadoid = 1))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaCreditos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 1) ELSE
+                             ((SELECT        COUNT(CuotaID) AS Expr1
+                                 FROM            Cuotas
+                                 WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision, 0) } + { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleNotaDebitos
+                                                                  WHERE        (CuotaID IN
+                                                                                               (SELECT        CuotaID
+                                                                                                 FROM            Cuotas AS C1
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleRecibos AS DR2
+                                                                  WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                               (SELECT        ReciboID
+                                                                                                 FROM            Recibos
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID) AND estadoID = 1))), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleNotaCreditos
+                                                                  WHERE        (CuotaID IN
+                                                                                               (SELECT        CuotaID
+                                                                                                 FROM            Cuotas AS C1
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 1)) END AS Cantidad, CASE WHEN CASE WHEN CONTRATOS.tipoContratoID = 3 THEN
+                             (SELECT        isnull(SUM(Capital + Comision + Interes), 0) AS Expr1
+                               FROM            Cuotas
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision + Interes, 0) } + { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaDebitos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleRecibos AS DR2
+                                                                 WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaCreditos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 0) ELSE isnull
+                             ((SELECT        { fn IFNULL(SUM(Capital + Comision), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleRecibos AS DR3
+                                                                  WHERE        (ReciboID IN
+                                                                                               (SELECT        ReciboID
+                                                                                                 FROM            Recibos
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID) AND (EstadoID = 1)))), 0) } AS Atraso
+                                 FROM            Cuotas AS C
+                                 WHERE        (ContratoID = Contratos.ContratoID) AND (Vence < @Hasta)), 0) END < 0 THEN 0 ELSE CASE WHEN CONTRATOS.tipoContratoID = 3 THEN
+                             (SELECT        isnull(SUM(Capital + Comision + Interes), 0) AS Expr1
+                               FROM            Cuotas
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision + Interes, 0) } + { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaDebitos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleRecibos AS DR2
+                                                                 WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaCreditos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 0) ELSE isnull
+                             ((SELECT        { fn IFNULL(SUM(Capital + Comision), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleRecibos AS DR3
+                                                                  WHERE        (ReciboID IN
+                                                                                               (SELECT        ReciboID
+                                                                                                 FROM            Recibos
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID) AND (EstadoID = 1)))), 0) } AS Atraso
+                                 FROM            Cuotas AS C
+                                 WHERE        (ContratoID = Contratos.ContratoID) AND (Vence < @Hasta)), 0) END END AS Atraso, Empresas.Empresa, Empresas.Direccion, Empresas.Telefonos, Empresas.Rnc, Empresas.Siglas, Sucursales.Sucursal, 
+                         Sucursales.SucursalID, TipoSolicitudes.TipoSolicitud, Personas.Correo
+FROM            Contratos INNER JOIN
+                         Solicitudes ON Contratos.SolicitudID = Solicitudes.SolicitudID INNER JOIN
+                         Clientes ON Solicitudes.ClienteID = Clientes.ClienteID INNER JOIN
+                         Personas ON Clientes.Documento = Personas.Documento INNER JOIN
+                         Sucursales ON Clientes.SucursalID = Sucursales.SucursalID INNER JOIN
+                         Empresas ON Sucursales.EmpresaID = Empresas.EmpresaID INNER JOIN
+                         TipoSolicitudes ON Solicitudes.TipoSolicitudID = TipoSolicitudes.TipoSolicitudID INNER JOIN
+                         Zonas on Contratos.ZonaID = Zonas.ZonaID
+
+WHERE        (Contratos.EstadoID = 1) AND (Contratos.Fecha <= @Hasta) AND (CASE WHEN CONTRATOS.tipoContratoID = 3 THEN
+                             (SELECT        COUNT(CuotaID) AS Expr1
+                               FROM            Cuotas
+                               WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision + Interes, 0) } + { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaDebitos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleRecibos AS DR2
+                                                                 WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                              (SELECT        ReciboID
+                                                                                                FROM            Recibos
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID) AND estadoid = 1))), 0) } - { fn IFNULL
+                                                             ((SELECT        SUM(Capital + Comision + Interes) AS Pagado
+                                                                 FROM            DetalleNotaCreditos
+                                                                 WHERE        (CuotaID IN
+                                                                                              (SELECT        CuotaID
+                                                                                                FROM            Cuotas AS C1
+                                                                                                WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 0) ELSE
+                             ((SELECT        COUNT(CuotaID) AS Expr1
+                                 FROM            Cuotas
+                                 WHERE        (ContratoID = Contratos.ContratoID) AND (Vence <= @Hasta) AND ({ fn IFNULL(Capital + Comision, 0) } + { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleNotaDebitos
+                                                                  WHERE        (CuotaID IN
+                                                                                               (SELECT        CuotaID
+                                                                                                 FROM            Cuotas AS C1
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID)))), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleRecibos AS DR2
+                                                                  WHERE        (CuotaID = Cuotas.CuotaID) AND (ReciboID IN
+                                                                                               (SELECT        ReciboID
+                                                                                                 FROM            Recibos
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID) AND estadoID = 1))), 0) } - { fn IFNULL
+                                                              ((SELECT        SUM(Capital + Comision) AS Pagado
+                                                                  FROM            DetalleNotaCreditos
+                                                                  WHERE        (CuotaID IN
+                                                                                               (SELECT        CuotaID
+                                                                                                 FROM            Cuotas AS C1
+                                                                                                 WHERE        (ContratoID = Contratos.ContratoID)))), 0) }) > 0)) END > 0)

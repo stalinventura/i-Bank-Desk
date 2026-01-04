@@ -1,0 +1,329 @@
+﻿<Controls:MetroWindow TitleCaps="False" x:Class="Payment.Bank.View.Formularios.frmContratos" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" xmlns:local="clr-namespace:Payment.Bank.Helpers" Title="titleContract" 
+    ShowTitleBar="True" TitlebarHeight="60" ShowIconOnTitleBar="True" TitleAlignment="Left" Height="650" Width="720" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderThickness="1" ShowCloseButton="False" WindowTitleBrush="{StaticResource BackgroundHeader}" TitleForeground="White" GlowBrush="{DynamicResource BackgroundHeader}" ShowInTaskbar="False">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <local:ImageSourceConverter x:Key="ImageSourceConverter"/>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalContentAlignment="Right" Margin="0,0,-15,0" Grid.Column="1" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" MinHeight="310"/>
+                    <RowDefinition Height="Auto" MinHeight="210"/>
+                    <RowDefinition Height="Auto" MinHeight="290"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+                <Grid Name="gridSolicitudes" Margin="10" Grid.Row="0" >
+                    <TextBox x:Name="txtNumero" HorizontalAlignment="Left" Text="{Binding Path=SolicitudID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="5,73,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="0"/>
+                    <ComboBox IsEnabled="False" x:Name="cmbTipoSolicitudes" SelectedValue="{Binding TipoSolicitudID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="5,133,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="1"/>
+                    <ComboBox IsEnabled="False" x:Name="cmbCondicionSolicitudes" SelectedValue="{Binding CondicionID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="336,133,0,0" VerticalAlignment="Top" Width="293" Height="25" TabIndex="2"/>
+                    <TextBox IsEnabled="False" x:Name="txtTiempo" Text="{Binding Tiempo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="5,193,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="3" />
+                    <TextBox IsEnabled="False" x:Name="txtMonto" Text="{Binding Monto, StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="336,193,0,0" VerticalAlignment="Top" Width="292" Height="25" TabIndex="4" />
+
+                    <Separator Height="52" Margin="0,4,0,0" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,4,0,0" TextWrapping="Wrap" Text="sectionA" FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="230"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="336,108,0,0" TextWrapping="Wrap" Text="lblCondición" VerticalAlignment="Top" Width="94"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="336,168,0,0" TextWrapping="Wrap" Text="lblMonto" VerticalAlignment="Top" Width="112"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,48,0,0" TextWrapping="Wrap" Text="lblNumero" VerticalAlignment="Top" Width="125"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,168,0,0" TextWrapping="Wrap" Text="lblTiempo" VerticalAlignment="Top" Width="130"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,108,0,0" TextWrapping="Wrap" Text="lblTipoSolicitud" VerticalAlignment="Top" Width="130"/>
+                    <TextBlock x:Name="lblContrato" Visibility="Collapsed" HorizontalAlignment="Left" TextAlignment="Right" Margin="402,61,0,0" FontSize="36" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Height="55"/>
+                </Grid>
+                <Grid Name="gridDatosPersonales" Margin="10,10,10,8" Grid.Row="1">
+                    <TextBox x:Name="txtDocumento" Text="{Binding Documento, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="7,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="5"/>
+                    <TextBox x:Name="txtNombres"  Text="{Binding Nombres, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="7,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="7"/>
+                    <TextBox x:Name="txtApellidos" Text="{Binding Apellidos, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="8"/>
+                    <TextBox x:Name="txtApodo" HorizontalAlignment="Left" Height="25" Margin="5,201,0,0" TextWrapping="Wrap" Text="{Binding Apodo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="203" TabIndex="9"/>
+                    <TextBox x:Name="txtCorreoElectronico" Text="{Binding Correo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,201,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" TabIndex="10"/>
+                    <ComboBox x:Name="cmbCiudades" SelectedValue="{Binding CiudadID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="6,261,0,0" VerticalAlignment="Top" Width="202" Height="25" TabIndex="11"/>
+                    <TextBox x:Name="txtDireccion" Text="{Binding Direccion, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Height="50" Margin="217,261,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="414" TabIndex="12"/>
+
+                    <TextBox x:Name="txtTelefono"  Text="{Binding Telefono, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="5,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="13"/>
+                    <TextBox x:Name="txtCelular"  Text="{Binding Celular, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,341,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="203" TabIndex="14"/>
+                    <ComboBox x:Name="cmbOperadores" SelectedValue="{Binding OperadorID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left"  Margin="430,341,0,0" VerticalAlignment="Top" Width="203" Height="25" TabIndex="15"/>
+                    <ComboBox x:Name="cmbSexos" SelectedValue="{Binding SexoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="5,401,0,0" VerticalAlignment="Top" Width="201" Height="25" TabIndex="16"/>
+                    <ComboBox x:Name="cmbEstadosCiviles" SelectedValue="{Binding EstadoCivilID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="215,401,0,0" VerticalAlignment="Top" Width="203" Height="25" TabIndex="17"/>
+                    <ComboBox x:Name="cmbSucursales" SelectedValue="{Binding SucursalID, Mode=OneWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="428,401,0,0" VerticalAlignment="Top" Width="203" Height="25" TabIndex="17"/>
+
+                    <Border Background="Transparent" DataContext="{Binding}" BorderBrush="{StaticResource BackgroundHeader}" BorderThickness="1" CornerRadius="2" Margin="512,61,0,0" Name="border2" Width="110" Height="130" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <Grid Name="grid2">
+                            <Image Margin="2" Name="srcPhoto" Stretch="Fill" Source="{Binding Fotografias.Foto, Mode=TwoWay, Converter={StaticResource ImageSourceConverter}}"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock Text="lblLastName" HorizontalAlignment="Left" Margin="219,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158"/>
+                    <TextBlock Text="lblNames" HorizontalAlignment="Left" Margin="7,115,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="sectionB"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>
+                    <TextBlock Text="lblNick" HorizontalAlignment="Left" Margin="5,176,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+                    <Separator Height="45" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                    <TextBlock Text="lblEmail"  HorizontalAlignment="Left" Margin="217,176,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
+                    <TextBlock Text="lblPhone"  HorizontalAlignment="Left" Margin="5,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+                    <TextBlock Text="lblCellular" HorizontalAlignment="Left" Margin="217,316,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="74"/>
+                    <TextBlock Text="lblSex" HorizontalAlignment="Left" Margin="5,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64"/>
+                    <TextBlock Text="lblMaritalStatus" HorizontalAlignment="Left" Margin="217,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+                    <TextBlock Text="lblOperator" Margin="430,316,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+                    <TextBlock Text="lblDocument" HorizontalAlignment="Left" Margin="10,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                    <DatePicker x:Name="txtFechaNacimiento" SelectedDate="{Binding FechaNacimiento, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="219,84,0,0" VerticalAlignment="Top" Width="207" TabIndex="6"/>
+                    <TextBlock Text="lblDateBirth" HorizontalAlignment="Left" Margin="219,58,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="158"/>
+                    <TextBlock Text="lblCiudad" HorizontalAlignment="Left" Margin="7,236,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169"/>
+                    <TextBlock Text="lblAddress" HorizontalAlignment="Left" Margin="219,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94"/>
+                    <Button x:Name="btnAdd_srcPhoto" HorizontalAlignment="Left" Margin="632,161,-1,0" VerticalAlignment="Top" Width="25" Height="25">
+                        <Image Width="20" Height="20" Source="/Images/search.png" />
+                    </Button>
+                    <Button x:Name="btnAdd_srcCamera" HorizontalAlignment="Left" Margin="632,137,-1,0" VerticalAlignment="Top" Width="25" Height="25">
+                        <Image Width="20" Height="20" Source="/Images/camera.png" />
+                    </Button>
+                    <TextBlock Text="lblSucursal" HorizontalAlignment="Left" Margin="430,376,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+                </Grid>
+
+
+                <Grid Name="gridDatosEconomicos" Margin="10,10,10,10" Grid.Row="2">
+                    <DatePicker x:Name="txtFechaIngreso" IsEnabled="False" SelectedDate="{Binding Fecha, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="120,76,0,0" VerticalAlignment="Top" Width="207" TabIndex="20"/>
+                    <ComboBox x:Name="cmbInstituciones" SelectedValue="{Binding InstitucionID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" IsEnabled="False" HorizontalAlignment="Left" Height="25" Margin="334,76,0,0" VerticalAlignment="Top" Width="297" TabIndex="21"/>
+                    <TextBox x:Name="txtDireccionTrabajo" Text="{Binding Instituciones.Direccion, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" IsEnabled="False" HorizontalAlignment="Left" Height="25" Margin="5,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="22"/>
+                    <TextBox x:Name="txtTelefonoTrabajo" Text="{Binding Instituciones.Telefono, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  IsEnabled="False" HorizontalAlignment="Left" Height="25" Margin="218,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" TabIndex="23"/>
+
+                    <ComboBox x:Name="cmbOcupaciones" SelectedValue="{Binding OcupacionID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" IsEnabled="False" HorizontalAlignment="Left" Margin="430,141,0,0" VerticalAlignment="Top" Width="201" Height="25" TabIndex="24"/>
+                    <ComboBox x:Name="cmbHorarios" SelectedValue="{Binding HorarioID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  IsEnabled="False" HorizontalAlignment="Left" Margin="5,201,0,0" VerticalAlignment="Top" Width="201" Height="25" TabIndex="25"/>
+                    <ComboBox x:Name="cmbIngresos" SelectedValue="{Binding IngresoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  IsEnabled="False" HorizontalAlignment="Left" Margin="218,201,0,0" VerticalAlignment="Top" Width="201" Height="25" TabIndex="26"/>
+                    <RadioButton x:Name="rbSi" Content="Si" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" TabIndex="18" />
+                    <RadioButton x:Name="rbNo" Content="No" HorizontalAlignment="Left" Margin="63,81,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="19"/>
+
+                    <Separator Height="52" Margin="0,3,0,0" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="SectionC"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="5,51,0,0" TextWrapping="Wrap" Text="lblWork"  VerticalAlignment="Top" Width="124"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="334,50,0,0" TextWrapping="Wrap" Text="lblWorkName" VerticalAlignment="Top" Width="255"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="7,116,0,0" TextWrapping="Wrap" Text="lblWorkAddress" VerticalAlignment="Top" Width="163"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="218,116,0,0" TextWrapping="Wrap" Text="lblWorkPhone"  VerticalAlignment="Top" Width="201"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="431,117,0,0" TextWrapping="Wrap" Text="lblOcupation" VerticalAlignment="Top" Width="158"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="7,177,0,0" TextWrapping="Wrap" Text="lblSchedule"  VerticalAlignment="Top" Width="163"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="218,176,0,0" TextWrapping="Wrap" Text="lblReceipts"  VerticalAlignment="Top" Width="155"/>
+                    <TextBlock Text="lblAdmissionDate" HorizontalAlignment="Left" Margin="120,50,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="158"/>
+
+                    <Button Width="25" Height="25" Margin="606,52,0,153" Name="btnAddBusiness" HorizontalAlignment="Left">
+                        <Image x:Name="image1" Width="20" Height="20" Source="/Images/add.png">
+                        </Image>
+                    </Button>
+                </Grid>
+
+
+                <Grid Name="gridContactoEmergencia" Margin="10,10,10,0" Grid.Row="3" Height="280" VerticalAlignment="Top">
+                    <DataGrid Name="dtgContactoEmergencias" AutoGenerateColumns="False" Height="173" Margin="5,52,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="625" TabIndex="37"  CanUserAddRows="False" CanUserDeleteRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn  x:Name="colNames" Header="colNames" Binding="{Binding Path=Referencia}" IsReadOnly="True" Width="180*" />
+                            <DataGridTextColumn Header="colAddress"  x:Name="colAddress"  Binding="{Binding Path=Direccion}" IsReadOnly="True" Width="130*"/>
+                            <DataGridTextColumn Header="colPhone"  x:Name="colPhone"  Binding="{Binding Path=Telefono}" IsReadOnly="True" Width="80*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button Name="btnAdd" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Width="40" Height="40" TabIndex="26">
+                        <Image Width="30" Height="30" Source="/Images/add.png" />
+                    </Button>
+                    <Button Name="btnEdit" HorizontalAlignment="Left" Margin="52,230,0,0" VerticalAlignment="Top" Width="40" Height="40" TabIndex="27">
+                        <Image Width="30" Height="30" Source="/Images/edit.png" />
+                    </Button>
+                    <Button Name="btnDelete" HorizontalAlignment="Left" Margin="95,230,0,0" VerticalAlignment="Top" Width="40" Height="40" TabIndex="28">
+                        <Image Width="30" Height="30" Source="/Images/delete.png" />
+                    </Button>
+                    <Separator Height="52" Margin="0,11,0,0" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,11,0,0" TextWrapping="Wrap" Text="SectionD" FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="594"/>
+                </Grid>
+
+                <WrapPanel Name="wpGarantias" Orientation="Vertical" Grid.Row="4" Margin="10,10,10,8">
+                    <TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Name="sectionE" Text="sectionE"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>
+                    <Separator Height="45" Margin="0,-15,0,0" VerticalAlignment="Top"/>
+                    <Grid Name="gridDatosGarantiaPersonal" Height="400" Margin="0,-10,0,0">
+                        <TextBox x:Name="txtDocumentoGarante" Text="{Binding Documento, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="7,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="29"/>
+                        <TextBox x:Name="txtNombresGarante"  Text="{Binding Nombres, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="7,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="31"/>
+                        <TextBox x:Name="txtApellidosGarante" Text="{Binding Apellidos, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,92,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="32"/>
+                        <TextBox x:Name="txtApodoGarante" HorizontalAlignment="Left" Height="25" Margin="5,157,0,0" TextWrapping="Wrap" Text="{Binding Apodo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="203" TabIndex="33"/>
+                        <TextBox x:Name="txtCorreoElectronicoGarante" Text="{Binding Correo, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="416" TabIndex="34"/>
+                        <ComboBox x:Name="cmbCiudadesGarante" SelectedValue="{Binding CiudadID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="6,217,0,0" VerticalAlignment="Top" Width="202" Height="25" TabIndex="35"/>
+                        <TextBox x:Name="txtDireccionGarante" Text="{Binding Direccion, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Height="50" Margin="217,217,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="414" TabIndex="36"/>
+
+                        <TextBox x:Name="txtTelefonoGarante"  Text="{Binding Telefono, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="5,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" TabIndex="37"/>
+                        <TextBox x:Name="txtCelularGarante"  Text="{Binding Celular, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="217,297,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="203" TabIndex="38"/>
+                        <ComboBox x:Name="cmbOperadoresGarante" SelectedValue="{Binding OperadorID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left"  Margin="430,297,0,0" VerticalAlignment="Top" Width="203" Height="25" TabIndex="39"/>
+                        <ComboBox x:Name="cmbSexosGarante" SelectedValue="{Binding SexoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="5,357,0,-1" VerticalAlignment="Top" Width="201" Height="25" TabIndex="40"/>
+                        <ComboBox x:Name="cmbEstadosCivilesGarante" SelectedValue="{Binding EstadoCivilID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Margin="215,357,0,-1" VerticalAlignment="Top" Width="203" Height="25" TabIndex="41"/>
+
+
+                        <Border Background="Transparent" DataContext="{Binding}" BorderBrush="{StaticResource BackgroundHeader}" BorderThickness="1" CornerRadius="2" Margin="512,17,0,0"  Width="120" Height="130" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid >
+                                <Image Margin="2" Name="srcPhotoGarante" Stretch="Fill" Source="{Binding Fotografias.Foto, Mode=TwoWay, Converter={StaticResource ImageSourceConverter}}"/>
+                            </Grid>
+                        </Border>
+                        <TextBlock Text="lblLastName" HorizontalAlignment="Left" Margin="219,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="158"/>
+                        <TextBlock Text="lblNames" HorizontalAlignment="Left" Margin="7,71,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="98"/>
+                        <!--<TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="sectionE"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>-->
+                        <TextBlock Text="lblNick" HorizontalAlignment="Left" Margin="5,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+                        <!--<Separator Height="45" Margin="0,10,0,0" VerticalAlignment="Top"/>-->
+                        <TextBlock Text="lblEmail"  HorizontalAlignment="Left" Margin="217,132,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="148"/>
+                        <TextBlock Text="lblPhone"  HorizontalAlignment="Left" Margin="5,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+                        <TextBlock Text="lblCellular" HorizontalAlignment="Left" Margin="217,272,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="74"/>
+                        <TextBlock Text="lblSex" HorizontalAlignment="Left" Margin="5,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="64"/>
+                        <TextBlock Text="lblMaritalStatus" HorizontalAlignment="Left" Margin="217,332,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="102"/>
+                        <TextBlock Text="lblOperator" Margin="430,272,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+                        <TextBlock Text="lblDocument" HorizontalAlignment="Left" Margin="10,16,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <DatePicker x:Name="txtFechaNacimientoGarante" SelectedDate="{Binding FechaNacimiento, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="219,40,0,0" VerticalAlignment="Top" Width="207" TabIndex="30"/>
+                        <TextBlock Text="lblDateBirth" HorizontalAlignment="Left" Margin="219,14,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="158"/>
+                        <TextBlock Text="lblCiudad" HorizontalAlignment="Left" Margin="7,192,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="169"/>
+                        <TextBlock Text="lblAddress" HorizontalAlignment="Left" Margin="219,192,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="94"/>
+                        <Button x:Name="btnAdd_srcPhotoGarante" HorizontalAlignment="Left" Margin="632,118,-1,0" VerticalAlignment="Top" Width="25" Height="25">
+                            <Image Width="20" Height="20" Source="/Images/search.png" />
+                        </Button>
+                        <Button x:Name="btnAdd_srcCameraGarante" HorizontalAlignment="Left" Margin="632,93,-1,0" VerticalAlignment="Top" Width="25" Height="25">
+                            <Image Width="20" Height="20" Source="/Images/camera.png" />
+                        </Button>
+                    </Grid>
+                    <Grid Name="gridDatosGarantiaHipotecario" Margin="-8,-15,0,0" Height="260"  Width="650">
+                        <TextBox x:Name="txtDescripcion" Text="{Binding Path=Descripcion, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="150" Margin="10,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="630" TabIndex="42"/>
+                        <TextBox x:Name="txtMontoHipoteca" Text="{Binding Path=Monto, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="10,216,508,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="43" />
+
+                        <TextBlock HorizontalAlignment="Left" Margin="10,19,0,0" TextWrapping="Wrap" Text="lblDescription" VerticalAlignment="Top"/>
+                        <TextBlock  HorizontalAlignment="Left" Margin="10,195,0,0" TextWrapping="Wrap" Text="lblMonto" VerticalAlignment="Top"/>
+                    </Grid>
+
+                    <Grid Name="gridDatosGarantiaVehiculo" Margin="0,10,0,0"  Height="269"  Width="650">
+                        <ComboBox x:Name="cmbTipoVehiculos" SelectedValue="{Binding TipoVehiculoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="44"/>
+                        <ComboBox x:Name="cmbModelos" SelectedValue="{Binding ModeloID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="45"/>
+                        <ComboBox x:Name="cmbColores" SelectedValue="{Binding ColorID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="332,81,0,0" VerticalAlignment="Top" Width="312" Height="25" TabIndex="46"/>
+                        <TextBox x:Name="txtChassis" Text="{Binding Path=Chasis, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="10,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" TabIndex="47"/>
+                        <TextBox x:Name="txtPlaca" Text="{Binding Path=Placa, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="332,133,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" TabIndex="48"/>
+                        <TextBox x:Name="txtRegistro" Text="{Binding Path=Registro, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="332,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" TabIndex="50"/>
+
+                        <DatePicker x:Name="txtFechaExpedicion" SelectedDate="{Binding FechaExpedicion, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="10,185,0,0" VerticalAlignment="Top" Width="312" TabIndex="49"/>
+                        <TextBox x:Name="txtAno" Text="{Binding Ano, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Height="25" Margin="10,237,0,-13" TextWrapping="Wrap" VerticalAlignment="Top" Width="312" TabIndex="52"/>
+
+
+                        <TextBlock Text="lblTypeOfVehicle" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblModel" HorizontalAlignment="Left" Margin="10,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblColor" HorizontalAlignment="Left" Margin="332,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblChassis" HorizontalAlignment="Left" Margin="10,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblPlate" HorizontalAlignment="Left" Margin="332,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblExpeditionDate" HorizontalAlignment="Left" Margin="10,164,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="158"/>
+                        <TextBlock Text="lblRegistry" HorizontalAlignment="Left" Margin="332,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                        <TextBlock Text="lblYear" HorizontalAlignment="Left" Margin="10,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
+                    </Grid>
+
+                </WrapPanel>
+
+                <Grid Margin="10,0" Grid.Row="5" Name="gridContratos">
+
+                    <ComboBox x:Name="cmbTipoContratos" SelectedValue="{Binding TipoContratoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="216,88,0,0" VerticalAlignment="Top" Width="201" Height="25" TabIndex="52"/>
+                    <TextBox  x:Name="txtInteres"  Text="{Binding Interes, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="0,148,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" TabIndex="53"/>
+                    <TextBox  x:Name="txtComision" Text="{Binding Comision, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="215,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" TabIndex="54"/>
+                    <TextBox x:Name="txtMontoPrestamo" IsReadOnly="True" HorizontalAlignment="Left" Height="25" Margin="320,148,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" TabIndex="55"/>
+
+                    <ComboBox x:Name="cmbOficiales" SelectedValue="{Binding OficialID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="0,324,0,0" VerticalAlignment="Top" Width="206" Height="25" TabIndex="56"/>
+                    <ComboBox x:Name="cmbNotarioPublico" SelectedValue="{Binding NotarioPublicoID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="215,324,0,0" VerticalAlignment="Top" Width="415" Height="25" TabIndex="57"/>
+
+                    <TextBox IsEnabled="False" x:Name="txtMoras" Text="{Binding Mora, StringFormat=N2, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="215,386,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" TabIndex="60"/>
+                    <TextBox IsEnabled="False" x:Name="txtDiasGracia" Text="{Binding DiasGracia, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="320,386,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="100" TabIndex="61"/>
+                    <ComboBox x:Name="cmbZonas" SelectedValue="{Binding ZonaID, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"  HorizontalAlignment="Left" Margin="1,452,0,0" VerticalAlignment="Top" Width="206" Height="25" TabIndex="56"/>
+                    <TextBox x:Name="lblCuota" HorizontalAlignment="Left" BorderThickness="0" TextAlignment="Right" Margin="420,78,0,0" FontSize="26" FontWeight="Bold" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Width="210"/>
+                    <TextBox IsEnabled="False" x:Name="txtLegal" Text="{Binding Legal, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="215,206,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" TabIndex="60"/>
+                    <TextBox IsEnabled="False" x:Name="txtTasaSeguro" Text="{Binding Seguro, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="215,263,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" TabIndex="60"/>
+                    <ComboBox x:Name="cmbBancos" SelectedValue="{Binding BancoID, Mode=OneWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="2,540,256,0" VerticalAlignment="Top" Height="25" TabIndex="56"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,63,0,0" TextWrapping="Wrap" Text="lblDateOfContract" VerticalAlignment="Top" Width="158"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="215,63,0,0" TextWrapping="Wrap" Text="lblTypeOfContract" VerticalAlignment="Top" Width="130"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,123,0,0" TextWrapping="Wrap" Text="lblInterestRate" VerticalAlignment="Top" Width="153"/>
+                    <TextBlock  Margin="216,123,0,0" TextWrapping="Wrap" Text="lblRateCommission" VerticalAlignment="Top" HorizontalAlignment="Left" Width="104"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="322,124,0,0" TextWrapping="Wrap" Text="lblMonto" VerticalAlignment="Top" Width="98"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,299,0,0" TextWrapping="Wrap" Text="lblAccountingOfficeContract" VerticalAlignment="Top" Width="130"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="215,299,0,0" TextWrapping="Wrap" Text="lblNotaryPublic" VerticalAlignment="Top" Width="130"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="0,361,0,0" TextWrapping="Wrap" Text="lblMoraAutomatically" VerticalAlignment="Top" Width="206"/>
+                    <TextBlock Margin="219,361,0,0" TextWrapping="Wrap" Text="lblLateFees" VerticalAlignment="Top" HorizontalAlignment="Left" Width="101"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="320,361,0,0" TextWrapping="Wrap" Text="lblDaysGrace" VerticalAlignment="Top" Width="101"/>
+
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,11,0,0" TextWrapping="Wrap" Text="sectionF" FontWeight="Normal" FontSize="18" Foreground="{StaticResource ResourceKey=BackgroundHeader}" VerticalAlignment="Top" Width="594"/>
+
+                    <RadioButton x:Name="rbMorasAut_Si" Content="Si" HorizontalAlignment="Left" Margin="8,389,0,0" VerticalAlignment="Top" TabIndex="58"  GroupName="Moras" />
+                    <RadioButton x:Name="rbMorasAut_No" Content="No" HorizontalAlignment="Left" Margin="61,390,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="59" GroupName="Moras" />
+
+                    <DatePicker x:Name="txtFechaContrato" SelectedDate="{Binding Path=Fecha, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" HorizontalAlignment="Left" Height="25" Margin="0,89,0,0" VerticalAlignment="Top" Width="207" TabIndex="51"/>
+                    <Separator Height="52" Margin="0,11,0,0" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="215,431,0,0" TextWrapping="Wrap" Text="lblShowCommission" VerticalAlignment="Top" Width="206"/>
+                    <RadioButton x:Name="rbComision_Si" Content="Si" HorizontalAlignment="Left" Margin="223,456,0,0" VerticalAlignment="Top" TabIndex="62" GroupName="Comision" />
+                    <RadioButton x:Name="rbComision_No" Content="No" HorizontalAlignment="Left" Margin="276,457,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="63" GroupName="Comision" />
+                    <TextBlock HorizontalAlignment="Left" Margin="431,431,0,0" TextWrapping="Wrap" Text="lblDataCredit" VerticalAlignment="Top" Width="206"/>
+                    <RadioButton x:Name="rbDataCredito_Si" Content="Si" HorizontalAlignment="Left" Margin="439,456,0,0" VerticalAlignment="Top" TabIndex="64" GroupName="DataCredito" IsChecked="True" />
+                    <RadioButton x:Name="rbDataCredito_No" Content="No" HorizontalAlignment="Left" Margin="492,457,0,0" VerticalAlignment="Top" TabIndex="65" GroupName="DataCredito" />
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,431,0,0" TextWrapping="Wrap" Text="lblRoad" VerticalAlignment="Top" Width="130"/>
+                    <Button Width="25" Height="25" Margin="185,427,0,0" x:Name="btnAddRoad" VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Image Width="20" Height="20" Source="/Images/add.png"/>
+                    </Button>
+                    <CheckBox x:Name="chkCuotas" Content="" HorizontalAlignment="Left" Margin="635,88,-54,0" VerticalAlignment="Top"/>
+
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,488,0,0" TextWrapping="Wrap" Text="lblGenerateBankRequest" VerticalAlignment="Top" Width="206" Height="20"/>
+                    <RadioButton x:Name="rbBankRequest_Si" Content="Si" HorizontalAlignment="Left" Margin="8,513,0,0" VerticalAlignment="Top" TabIndex="62" GroupName="BankRequest" />
+                    <RadioButton x:Name="rbBankRequest_No" Content="No" HorizontalAlignment="Left" Margin="61,514,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="63" GroupName="BankRequest" />
+                    <TextBlock HorizontalAlignment="Left" Margin="215,488,0,0" TextWrapping="Wrap" Text="lblGenerateLetterDelay" VerticalAlignment="Top" Width="205"/>
+                    <RadioButton x:Name="rbCartas_Si" Content="Si" HorizontalAlignment="Left" Margin="223,513,0,0" VerticalAlignment="Top" TabIndex="62" GroupName="Letter" />
+                    <RadioButton x:Name="rbCartas_No" Content="No" HorizontalAlignment="Left" Margin="276,514,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="63" GroupName="Letter" />
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,181,0,0" TextWrapping="Wrap" Text="lblLegalExpenses" VerticalAlignment="Top" Width="206"/>
+                    <TextBlock Margin="219,181,0,0" TextWrapping="Wrap" Text="lblLegalRate" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+                    <RadioButton x:Name="rbLegal_Si" Content="Si" HorizontalAlignment="Left" Margin="8,206,0,0" VerticalAlignment="Top" TabIndex="58"  GroupName="Legal" />
+                    <RadioButton x:Name="rbLegal_No" Content="No" HorizontalAlignment="Left" Margin="61,207,0,0" VerticalAlignment="Top" IsChecked="True" TabIndex="59" GroupName="Legal" />
+                    <TextBox x:Name="lblLegal" HorizontalAlignment="Left" IsReadOnly="True" IsEnabled="False" BorderThickness="0" TextAlignment="Right" Margin="430,201,0,0" FontSize="20" FontWeight="Normal" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Height="35" Width="210"/>
+
+
+                    <TextBlock Margin="436,184,0,0" TextWrapping="Wrap" Text="lblLegalAmount" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="0,238,0,0" TextWrapping="Wrap" Text="lblHaveInsurance" VerticalAlignment="Top" Width="206"/>
+                    <TextBlock Margin="219,238,0,0" TextWrapping="Wrap" Text="lblInsuranceRate" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+                    <RadioButton x:Name="rbInsurance_Si" Content="Si" HorizontalAlignment="Left" Margin="8,263,0,0" VerticalAlignment="Top" TabIndex="58"  GroupName="Seguro" />
+                    <RadioButton x:Name="rbInsurance_No" Content="No" HorizontalAlignment="Left" Margin="61,264,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="59" GroupName="Seguro" />
+                    <TextBox x:Name="lblSeguro" HorizontalAlignment="Left" IsReadOnly="True" IsEnabled="False" BorderThickness="0" TextAlignment="Right" Margin="430,258,0,0" FontSize="20" FontWeight="Normal" TextWrapping="Wrap" Text="0.00" VerticalAlignment="Top" Height="35" Width="210"/>
+
+
+                    <TextBlock Margin="436,241,0,0" TextWrapping="Wrap" Text="lblInsuranceAmount" VerticalAlignment="Top" HorizontalAlignment="Left" Width="201"/>
+                    <TextBox x:Name="txtActo" HorizontalAlignment="Left" MaxLength="30" VerticalContentAlignment="Center" BorderThickness="0" TextAlignment="Right" Margin="430,293,0,0" FontSize="16" FontWeight="Normal" TextWrapping="Wrap" Text="{Binding Acto, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" VerticalAlignment="Top" Width="200" Height="26"/>
+                    <ComboBox x:Name="cmbObjetivos" SelectedValue="{Binding BancoID, Mode=OneWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}" Margin="430,514,43,0" VerticalAlignment="Top" Height="25" TabIndex="56"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="430,488,0,0" TextWrapping="Wrap" Text="lblTarget" VerticalAlignment="Top" Width="206" Height="20"/>
+                    <CheckBox x:Name="chkCierre" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="639,209,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="chkSeguro" Content="" IsEnabled="False" HorizontalAlignment="Left" Margin="639,267,0,0" VerticalAlignment="Top"/>
+                    
+                    <TextBlock HorizontalAlignment="Left" Margin="431,361,0,0" TextWrapping="Wrap" Text="lblMoraDiaria" VerticalAlignment="Top" Width="206"/>
+                    <RadioButton x:Name="rbMoraDiaria_Si" Content="Si" HorizontalAlignment="Left" Margin="439,388,0,0" VerticalAlignment="Top" TabIndex="58"  GroupName="MoraDiaria" />
+                    <RadioButton x:Name="rbMoraDiaria_No" Content="No" HorizontalAlignment="Left" Margin="492,389,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="59" GroupName="MoraDiaria" />
+                    
+                   <TextBlock HorizontalAlignment="Left" Margin="431,123,0,0" TextWrapping="Wrap" Text="lblinterestJournal" VerticalAlignment="Top" Width="206"/>
+                    <RadioButton x:Name="rbInteresDiario_Si" Content="Si" HorizontalAlignment="Left" Margin="439,150,0,0" VerticalAlignment="Top" TabIndex="58"  GroupName="InteresDiario" />
+                    <RadioButton x:Name="rbInteresDiario_No" Content="No" HorizontalAlignment="Left" Margin="492,151,0,0" VerticalAlignment="Top" IsChecked="true" TabIndex="59" GroupName="InteresDiario" />
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="10,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="1">
+            <CheckBox x:Name="chkDocument" IsChecked="True" Content="lblPrintContract" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="1">
+            <Button Height="55" Width="55" Margin="0" x:Name="btnAceptar"  IsDefault="False" TabIndex="70">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" x:Name="btnSalir" Width="55" IsCancel="False" TabIndex="71">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

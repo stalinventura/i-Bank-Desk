@@ -1,0 +1,44 @@
+﻿<Window x:Class="Payment.Bank.View.Formularios.frmDisclaimer" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" Title="titleDisclaimer" 
+    Height="480" Width="700" WindowStyle="None" AllowsTransparency="True" BorderThickness="1" BorderBrush="{StaticResource BackgroundHeader}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize"  ShowInTaskbar="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="80*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="{StaticResource BackgroundHeader}" Grid.Row="0" Grid.ColumnSpan="3" Stroke="Black" Margin="-2,-2,-2, -2"/>
+
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="210"/>
+            </Grid.RowDefinitions>
+            <Grid Name="gridDatosPersonales" Margin="10,10,10,8" Grid.Row="0">
+                <TextBlock HorizontalAlignment="Left" Margin="0,3,0,0" TextWrapping="Wrap" Text="msgTitle"  FontWeight="Normal" FontSize="18" Foreground="{StaticResource BackgroundHeader}" VerticalAlignment="Top" Width="238"/>
+                <Separator Height="45" Margin="0,10,0,0" VerticalAlignment="Top"/>
+                <TextBlock x:Name="lblMessage" Text="i-bank es un software de gestión financiera basado en inteligencia artificial, en este sentido queremos informar que Data Crédito ha solicitado que la distribución de atrasos sean totalizados en una sola columna (la más antigua), lo cual implica que el cliente sea reportado con una antigüedad de atraso no correspondiente a la realidad, por tal razón, no somos responsable del contenido de este archivo ni de las consecuencias de cualquier acción realizada en base a la información proporcionada." HorizontalAlignment="Left" TextAlignment="Justify" Margin="131,76,0,0" TextWrapping="Wrap" FontSize="14"  Width="483" Height="168" VerticalAlignment="Top"/>
+                <Image Height="138" Margin="10,52,535,210"  x:Name="MessageIcon" Source="/Controles/Icon/Alert.png" Stretch="Uniform" VerticalAlignment="Center" />
+                <RadioButton x:Name="lblAcept" Content="lblAcept" HorizontalAlignment="Left" Margin="443,268,0,0" VerticalAlignment="Top" Height="24"/>
+                <RadioButton x:Name="lblDecline" Content="lblDecline" IsChecked="True" HorizontalAlignment="Left" Margin="536,268,0,0" VerticalAlignment="Top" Height="24"/>
+
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Name="spButton" HorizontalAlignment="Right" Margin="0,5,10,0" Grid.Column="1" VerticalAlignment="Top" Height="55" Grid.Row="2">
+            <Button Height="55" Width="55" Margin="0" Name="btnAceptar"  IsDefault="True" TabIndex="36">
+                <Image Width="40" Height="40" Source="/Images/check.png" />
+            </Button>
+            <Button Margin="0" Name="btnSalir" Width="55" IsCancel="False" TabIndex="37">
+                <Image Width="40" Height="40" Source="/Images/back.png" />
+            </Button>
+        </StackPanel>
+        <TextBlock HorizontalAlignment="Left" Margin="10,19,0,0" Grid.Column="1" TextWrapping="Wrap" Text="titleDisclaimer" Foreground="White" FontSize="18" VerticalAlignment="Top" Width="297" Height="24"/>
+    </Grid>
+</Window>
